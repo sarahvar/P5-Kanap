@@ -1,11 +1,14 @@
-const requestProducts = async () => {
-    let response = await fetch("http://localhost:3000/api/products");
-    if (response.ok){
-        return await response.json();
-    }
-    else {
-        console.error ("Statut du serveur:"), response.status;
-    }
-}
+fetch("http://localhost:3000/api/products")
+    .then(function(res) {
+        if (res.ok) {
+            return res.json();
+        }
+    })
+    .then(function(products) {
+        displayProducts(products);
+    })
+    .catch(function(err) {
+        // Retourner si il y a erreur
+    });
 
 
