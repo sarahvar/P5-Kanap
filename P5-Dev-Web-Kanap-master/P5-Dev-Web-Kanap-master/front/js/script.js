@@ -3,8 +3,8 @@ const requestProducts = async () => {
     if (response.ok){
         return await response.json();
     }
-    else (response.error){
-        "statut du serveur:", response.status;
+    else {
+        console.error ("Statut du serveur:"), response.status;
     }
 }
 
