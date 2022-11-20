@@ -27,7 +27,7 @@ function appendChildren(anchor){
 function makeArticle(){
 const article = document.createElement("article")
 console.log(article)
-return arcticle
+return article
 }
 
 function makeImage(imageUrl, altTxt){
@@ -38,9 +38,11 @@ return image
 }
 
 function makeH3(){
-
+const H3 = document.createElement("h3")
+return h3
 }
 
 function makeParagraph(){
-
+const paragraphe = document.createElement("p")
+return p
 }
