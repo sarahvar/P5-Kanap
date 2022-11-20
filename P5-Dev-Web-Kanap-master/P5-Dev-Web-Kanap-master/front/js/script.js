@@ -8,4 +8,7 @@ anchor.href = "http://localhost:3000/images/kanap01.jpeg"
 anchor.text = "Dis enim malesuada risus sapien gravida nulla nisl arcu. Dis enim malesuada risus sapien gravida nulla nisl arcu."
 
 const items = document.querySelector("#items")
-items.appendChild(anchor)
+if (items != null) {
+    items.appendChild(anchor)
+}
+//Si items est different de null on donne l'enfant anchor à items
