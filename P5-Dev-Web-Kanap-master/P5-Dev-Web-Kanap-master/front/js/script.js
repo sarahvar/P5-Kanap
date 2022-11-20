@@ -26,6 +26,12 @@ function appendChildren(anchor){
 }
 function makeArticle(){
 const article = document.createElement("article")
+const image = makeImage()
+const h3 = makeH3()
+const p = makeParagraph()
+article.appendChild(image)
+article.appendChild(H3)
+article.appendChild(p)
 console.log(article)
 return article
 }
