@@ -7,4 +7,5 @@ const anchor = document.createElement("a")
 anchor.href = "http://localhost:3000/images/kanap01.jpeg"
 anchor.text = "Dis enim malesuada risus sapien gravida nulla nisl arcu. Dis enim malesuada risus sapien gravida nulla nisl arcu."
 
-const items = getElementByid(items)
+const items = document.querySelector("#items")
+items.appendChild(anchor)
