@@ -10,12 +10,17 @@ function addProducts(donnees){
     const imageUrl = donnees[0].imageUrl
     const altTxt = donnees[0].altTxt
     const name = donnees[0].name
+    const description = donnees[0].description
+
     const image = makeImage(imageUrl, altTxt)
     const anchor = makeAnchor(id)
     const article = makeArticle()
     const h3 = makeH3(name)
+    const p = makeParagraph(description)
+
     article.appendChild(image)
     article.appendChild(h3)
+    article.appendChild(p)
     appendChildren(anchor, article)
 }
 
@@ -42,7 +47,6 @@ function makeImage(imageUrl, altTxt){
 function makeArticle(){
 const article = document.createElement("article")
 const p = makeParagraph()
-//article.appendChild(p)
 console.log(article)
 return article
 }
@@ -51,8 +55,13 @@ return article
 function makeH3(name){
 const h3 = document.createElement("h3")
 h3.textContent = name
+h3.classList.add("productName")
 return h3
 }
 
-function makeParagraph(){
+function makeParagraph(description){
+const p = document.createElement("p")
+p.textContent = description
+p.classList.add("productDescription")
+return p
 }
