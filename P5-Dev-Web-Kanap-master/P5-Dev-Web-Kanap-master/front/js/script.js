@@ -5,3 +5,4 @@ fetch("http://localhost:3000/api/products")
 
 const anchor = document.createElement("a")
 anchor.href = "http://localhost:3000/images/kanap01.jpeg"
+anchot.text = "Dis enim malesuada risus sapien gravida nulla nisl arcu. Dis enim malesuada risus sapien gravida nulla nisl arcu."
