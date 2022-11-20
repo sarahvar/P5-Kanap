@@ -7,9 +7,14 @@ fetch("http://localhost:3000/api/products")
 
 function addProducts(donnees){
     const id = donnees[0]._id
-    const anchor = makeAnchor(id);
+    const imageUrl = donnees[0]._id.imageUrl
+    const altTxt = donnees[0].altTxt
+    const image = makeImage(imageUrl, altTxt)
+
+    const anchor = makeAnchor(id)
     const article = makeArticle()
-    appendChildren(anchor)
+    article.appendChild(image)
+    appendChildren(anchor, article)
 }
 
 function makeAnchor(id){
@@ -18,20 +23,20 @@ function makeAnchor(id){
     return anchor
 }
 
-function appendChildren(anchor){
+function appendChildren(anchor, article){
     const items = document.querySelector("#items")
     if (items != null) {
         items.appendChild(anchor)
+        items.appendChild(article)
     }
 }
 function makeArticle(){
 const article = document.createElement("article")
-const image = makeImage()
 const h3 = makeH3()
 const p = makeParagraph()
-article.appendChild(image)
-article.appendChild(H3)
-article.appendChild(p)
+//article.appendChild(image)
+//article.appendChild(h3)
+//article.appendChild(p)
 console.log(article)
 return article
 }
@@ -45,10 +50,10 @@ return image
 
 function makeH3(){
 const H3 = document.createElement("h3")
-return h3
+return H3
 }
 
 function makeParagraph(){
 const paragraphe = document.createElement("p")
-return p
+return paragraphe
 }
