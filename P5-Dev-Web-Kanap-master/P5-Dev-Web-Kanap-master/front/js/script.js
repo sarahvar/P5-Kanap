@@ -9,10 +9,13 @@ function addProducts(donnees){
     const id = donnees[0]._id
     const imageUrl = donnees[0].imageUrl
     const altTxt = donnees[0].altTxt
+    const name = donnees[0].name
     const image = makeImage(imageUrl, altTxt)
     const anchor = makeAnchor(id)
     const article = makeArticle()
+    const h3 = makeH3(name)
     article.appendChild(image)
+    article.appendChild(h3)
     appendChildren(anchor, article)
 }
 
@@ -26,7 +29,7 @@ function appendChildren(anchor, article){
     const items = document.querySelector("#items")
     if (items != null) {
         items.appendChild(anchor)
-        items.appendChild(article)
+        anchor.appendChild(article)
     }
 }
 function makeImage(imageUrl, altTxt){
@@ -38,17 +41,18 @@ function makeImage(imageUrl, altTxt){
 
 function makeArticle(){
 const article = document.createElement("article")
-const h3 = makeH3()
 const p = makeParagraph()
-//article.appendChild(image)
-//article.appendChild(h3)
 //article.appendChild(p)
 console.log(article)
 return article
 }
 
 
-function makeH3(){}
+function makeH3(name){
+const h3 = document.createElement("h3")
+h3.textContent = name
+return h3
+}
 
 function makeParagraph(){
 }
