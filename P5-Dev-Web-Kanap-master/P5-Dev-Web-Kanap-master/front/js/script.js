@@ -2,9 +2,8 @@ fetch("http://localhost:3000/api/products")
     .then((res) => res.json())
     .then((data) => addProducts(data))
     .catch(() => {
-        console.log("Error Requête échouée")
-    }        
-);
+        console.log("Error Requête échouée");   
+    });
     
 
  //L'API Fetch récupere les données des produits sur le server 3000
