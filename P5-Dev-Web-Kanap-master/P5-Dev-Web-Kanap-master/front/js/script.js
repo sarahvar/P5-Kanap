@@ -1,7 +1,12 @@
-fetch("http://localhost:3000/api/products")
+fetch("http://localhost:3000/ap/products")
     .then((res) => res.json())
     .then((data) => addProducts(data))
-        
+    .catch((error) => {
+        console.log(error.json())
+    }        
+);
+    
+
  //L'API Fetch récupere les données des produits sur le server 3000
 
 
