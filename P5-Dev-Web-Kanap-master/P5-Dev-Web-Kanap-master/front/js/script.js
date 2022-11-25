@@ -1,8 +1,8 @@
-fetch("http://localhost:3000/ap/products")
+fetch("http://localhost:3000/api/products")
     .then((res) => res.json())
     .then((data) => addProducts(data))
-    .catch((error) => {
-        console.log("error");   
+    .catch(() => {
+        console.log("Une erreur est survenue");   
     });
     
 
