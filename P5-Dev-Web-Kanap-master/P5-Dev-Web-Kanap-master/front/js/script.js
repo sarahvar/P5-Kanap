@@ -1,8 +1,8 @@
-fetch("http://localhost:3000/api/products")
+fetch("http://localhost:3000/ap/products")
     .then((res) => res.json())
     .then((data) => addProducts(data))
-    .catch(() => {
-        console.log("Error Requête échouée");   
+    .catch((error) => {
+        console.log("error");   
     });
     
 
@@ -51,7 +51,6 @@ function makeImage(imageUrl, altTxt){
 function makeArticle(){
 const article = document.createElement("article")
 const p = makeParagraph()
-console.log(article)
 return article
 }
 
