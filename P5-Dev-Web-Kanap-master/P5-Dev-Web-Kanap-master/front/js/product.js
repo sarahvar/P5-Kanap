@@ -10,6 +10,7 @@ fetch(`http://localhost:3000/api/products/${_id}`)
 function handleData(kanap){
     const { altTxt, colors, description, imageUrl, name, price, _id} = kanap
     makeImage(imageUrl, altTxt)
+    makeTitle(name)
 }
 function makeImage(imageUrl, altTxt){
     const image = document.createElement("img")
@@ -17,4 +18,8 @@ function makeImage(imageUrl, altTxt){
     image.alt = altTxt
     const parent = document.querySelector(".item__img")
     if (parent != null) parent.appendChild(image)
+}
+
+function makeTitle(name){
+    document.querySelector("#title").textContent = name
 }
