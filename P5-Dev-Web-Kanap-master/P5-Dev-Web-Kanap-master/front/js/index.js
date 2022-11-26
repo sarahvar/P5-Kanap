@@ -12,16 +12,9 @@ fetch("http://localhost:3000/api/products")
 function addProducts(data){
 
     data.forEach((kanap) => {
-    console.log("kanap: ", kanap)
 
-    const _id = kanap._id
-    const imageUrl = kanap.imageUrl
-    const altTxt = kanap.altTxt
-    const name = kanap.name
-    const description = kanap.description
-
+    const { _id, imageUrl, altTxt, name, description} = kanap
     const anchor = makeAnchor(_id)
-
     const article = document.createElement("article")
     const image = makeImage(imageUrl, altTxt)
     const h3 = makeH3(name)
