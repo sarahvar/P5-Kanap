@@ -13,24 +13,34 @@ function addProducts(data){
 
     data.forEach((kanap) => {
 
+    //const _id = kanap._id
+    //const imageUrl = kanap.imageUrl
+    //const altTxt = kanap.altTxt
+    //const name = kanap.name
+    //const description = kanap.description
+
     const { _id, imageUrl, altTxt, name, description} = kanap
     const anchor = makeAnchor(_id)
+
     const article = document.createElement("article")
     const image = makeImage(imageUrl, altTxt)
     const h3 = makeH3(name)
     const p = makeParagraph(description)
 
-    appendElementToArticle(article,image,h3,p)
+    appendElementToArticle(article,[image,h3,p])
     appendArticleToAnchor(anchor, article)
 })
 }
 
 
 
-function appendElementToArticle(article,image,h3,p){
-    article.appendChild(image)
-    article.appendChild(h3)
-    article.appendChild(p)
+function appendElementToArticle(article,array){
+    array.forEach((item) => {
+        article.appendChild(item)
+    })
+    //article.appendChild(image)
+    //article.appendChild(h3)
+    //article.appendChild(p)
 }
 
 function makeAnchor(_id){
