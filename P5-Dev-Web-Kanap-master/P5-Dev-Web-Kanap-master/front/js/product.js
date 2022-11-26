@@ -12,3 +12,4 @@ const image = document.createElement("img")
 image.src = "http://localhost:3000/images/kanap01.jpeg"
 image.alt = "Photo d'un canapé bleu, deux places"
 document.querySelector("item__img")
+article.appendChild(image)
