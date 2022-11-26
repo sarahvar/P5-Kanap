@@ -11,6 +11,7 @@ function handleData(kanap){
     const { altTxt, colors, description, imageUrl, name, price, _id} = kanap
     makeImage(imageUrl, altTxt)
     makeTitle(name)
+    makePrice(price)
 }
 function makeImage(imageUrl, altTxt){
     const image = document.createElement("img")
@@ -21,5 +22,6 @@ function makeImage(imageUrl, altTxt){
 }
 
 function makeTitle(name){
-    document.querySelector("#title").textContent = name
+    const h1 = document.querySelector("#title")
+    if (h1 != null) h1.textContent = name
 }
