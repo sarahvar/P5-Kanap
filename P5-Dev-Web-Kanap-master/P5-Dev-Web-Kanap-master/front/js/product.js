@@ -1,9 +1,9 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString)
-const productId = urlParams.get("_id")
+const _id = urlParams.get("_id")
 console.log({queryString})
 
-fetch(`http://localhost:3000/api/products/`+_id)
-	.then((reponse) => {
-		if (reponse.ok) return reponse.json();
-	})
+fetch(`http://localhost:3000/api/products/${_id}`)
+	.then((response) => response.json())
+    .then(res => console.log(res))
+	
