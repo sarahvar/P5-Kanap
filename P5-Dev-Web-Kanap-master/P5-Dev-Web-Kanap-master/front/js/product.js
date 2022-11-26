@@ -5,12 +5,23 @@ console.log({queryString})
 
 fetch(`http://localhost:3000/api/products/${_id}`)
 	.then((response) => response.json())
-    .then(res => console.log(res))
-	
-function appendArticleToImage(image)
-{const image = document.createElement("img") 
-image.src = "http://localhost:3000/images/kanap01.jpeg"
-image.alt = "Photo d'un canapé bleu, deux places"
-document.querySelector("item__img")
-.appendChild(image)
+    .then((res) => handleData(res))
+    
+function handleData(kanap){
+    const altTxt = kanap.altTxt
+    const colors = kanap.colors
+    const description = kanap.description
+    const imageUrl = kanap.imageUrl
+    const name = kanap.name
+    const price = kanap.price
+    const _id = kanap._id
+    makeImage(imageUrl, altTxt)
+}
+
+function makeImage(imageUrl, altTxt){
+    const image = document.createElement("image")
+    image.src = imageUrl
+    image.alt = altTxt
+    const parent = document.querySelector("item__img")
+    parent.appendChild(image)
 }
