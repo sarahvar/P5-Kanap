@@ -10,14 +10,16 @@ fetch("http://localhost:3000/api/products")
 
 
 function addProducts(data){
-    
-console.log(data)
 
     data.forEach((kanap) => {
     console.log("kanap: ", kanap)
-    
 
-    const { _id, imageUrl, altTxt, name, description} = kanap
+    const _id = kanap._id
+    const imageUrl = kanap.imageUrl
+    const altTxt = kanap.altTxt
+    const name = kanap.name
+    const description = kanap.description
+
     const anchor = makeAnchor(_id)
 
     const article = document.createElement("article")
@@ -27,7 +29,7 @@ console.log(data)
 
     appendElementToArticle(article,image,h3,p)
     appendArticleToAnchor(anchor, article)
-    })
+})
 }
 
 
@@ -38,9 +40,9 @@ function appendElementToArticle(article,image,h3,p){
     article.appendChild(p)
 }
 
-function makeAnchor(id){
+function makeAnchor(_id){
     const anchor = document.createElement("a")
-    anchor.href = "./product.html?id=" + id
+    anchor.href = "./product.html?_id=" + _id
     return anchor
 }
 
@@ -55,8 +57,6 @@ function makeImage(imageUrl, altTxt){
     const image =  document.createElement("img")
     image.src = imageUrl
     image.alt = altTxt
-    image.removeAttribute("title")
-    image.removeAttribute("style")
     return image
     }
 
