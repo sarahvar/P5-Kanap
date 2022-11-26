@@ -9,23 +9,33 @@ fetch("http://localhost:3000/api/products")
  //L'API Fetch récupere les données des produits sur le server 3000
 
 
-function addProducts(donnees){
-    const id = donnees[0]._id
-    const imageUrl = donnees[0].imageUrl
-    const altTxt = donnees[0].altTxt
-    const name = donnees[0].name
-    const description = donnees[0].description
+function addProducts(data){
+    
+console.log(data)
 
+    data.forEach((kanap) => {
+    console.log("kanap: ", kanap)
+    
+
+    const { _id, imageUrl, altTxt, name, description} = kanap
+    const anchor = makeAnchor(_id)
+
+    const article = document.createElement("article")
     const image = makeImage(imageUrl, altTxt)
-    const anchor = makeAnchor(id)
-    const article = makeArticle()
     const h3 = makeH3(name)
     const p = makeParagraph(description)
 
+    appendElementToArticle(article,image,h3,p)
+    appendArticleToAnchor(anchor, article)
+    })
+}
+
+
+
+function appendElementToArticle(article,image,h3,p){
     article.appendChild(image)
     article.appendChild(h3)
     article.appendChild(p)
-    appendChildren(anchor, article)
 }
 
 function makeAnchor(id){
@@ -34,7 +44,7 @@ function makeAnchor(id){
     return anchor
 }
 
-function appendChildren(anchor, article){
+function appendArticleToAnchor(anchor, article){
     const items = document.querySelector("#items")
     if (items != null) {
         items.appendChild(anchor)
@@ -45,14 +55,10 @@ function makeImage(imageUrl, altTxt){
     const image =  document.createElement("img")
     image.src = imageUrl
     image.alt = altTxt
+    image.removeAttribute("title")
+    image.removeAttribute("style")
     return image
     }
-
-function makeArticle(){
-const article = document.createElement("article")
-const p = makeParagraph()
-return article
-}
 
 
 function makeH3(name){
