@@ -7,9 +7,10 @@ fetch(`http://localhost:3000/api/products/${_id}`)
 	.then((response) => response.json())
     .then(res => console.log(res))
 	
-
-const image = document.createElement("img")
+function appendArticleToImage(image)
+{const image = document.createElement("img") 
 image.src = "http://localhost:3000/images/kanap01.jpeg"
 image.alt = "Photo d'un canapé bleu, deux places"
 document.querySelector("item__img")
-article.appendChild(image)
+.appendChild(image)
+}
