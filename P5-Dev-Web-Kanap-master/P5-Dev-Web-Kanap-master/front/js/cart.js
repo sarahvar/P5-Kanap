@@ -1,2 +1,6 @@
 const numberOfItems = localStorage.length;
-console.log("Nombre d'objets ajoutés:", numberOfItems)
+
+for (let i = 0; i < numberOfItems; i++){
+    const item = localStorage.getItem(localStorage.key(i))
+    console.log("objet à la position", i, "est",item)
+}
