@@ -1,6 +1,9 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString)
 const _id = urlParams.get("_id")
+if (id != null){
+    let itemPrice = 0
+}
 
 fetch(`http://localhost:3000/api/products/${_id}`)
 	.then((response) => response.json())
@@ -12,6 +15,7 @@ fetch(`http://localhost:3000/api/products/${_id}`)
     
 function handleData(kanap){
     const { altTxt, colors, description, imageUrl, name, price,} = kanap
+    itemPrice = price
     makeImage(imageUrl, altTxt)
     makeTitle(name)
     makePrice(price)
@@ -66,9 +70,9 @@ button.addEventListener("click", (e) => {
         _id: _id,
         color: color,
         quantity: quantity,
-        price: price,
+        price: itemPrice,
     }
-    localStorage.setItem(_id, data)
+    localStorage.setItem(_id, JSON.stringify (data))
 })
 }
 
