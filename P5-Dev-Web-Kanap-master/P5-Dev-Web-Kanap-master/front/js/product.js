@@ -59,5 +59,9 @@ if (button != null){
 button.addEventListener("click", (e) => {
     const color = document.querySelector("#colors").value
     const quantity = document.querySelector("#quantity").value
+    if (color == null || quantity == null){
+        alert("S'il vous plaît selectionnez couleur et quantité")
+    }
 })
 }
+
