@@ -42,9 +42,8 @@ function makeColors(colors){
     const select = document.querySelector("#colors")
     if (select != null){
         colors.forEach((color) => {
-            const option = document.createElement("option")
             option.value = color
-            select.appendChild(option)
+            const option = document.createElement(option)
         })
     
     }
