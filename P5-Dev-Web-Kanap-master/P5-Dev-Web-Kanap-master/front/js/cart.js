@@ -19,10 +19,19 @@ for (let i = 0; i < numberOfItems; i++){
     cart.push(itemObject)
 }
 }
-
 function displayItem(item){
-const image = makeImage(item)
+    const article = makeArticle(item)
+    console.log(article)
+    const image = makeImage(item)
 }
+function makeArticle(item){
+    const article = document.createElement("article")
+    article.classList.add("card__item")
+    article.dataset.id = item._id
+    article.dataset.color = item.color
+    return article
+}
+
 function makeImage(item){
     const image = document.createElement('img')
     image.src = item.imageUrl
