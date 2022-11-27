@@ -12,6 +12,7 @@ function handleData(kanap){
     makeImage(imageUrl, altTxt)
     makeTitle(name)
     makePrice(price)
+    makeDescription(description)
 }
 function makeImage(imageUrl, altTxt){
     const image = document.createElement("img")
@@ -29,4 +30,9 @@ function makeTitle(name){
 function makePrice(price){
     const span = document.querySelector("#price")
     if (span != null) span.textContent = price
+}
+
+function makeDescription(description){
+    const p = document.querySelector("#description")
+    if ( p != null) p.textContent = description
 }
