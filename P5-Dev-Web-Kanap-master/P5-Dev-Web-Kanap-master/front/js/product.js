@@ -62,7 +62,13 @@ button.addEventListener("click", (e) => {
     if (color == null || color === "" || quantity == null ||quantity == 0) {
         alert("S'il vous plaît selectionnez une couleur ET une quantité")
     }
-    localStorage.setItem(_id, color)
+    const data= {
+        _id: _id,
+        color: color,
+        quantity: quantity,
+        price: price,
+    }
+    localStorage.setItem(_id, data)
 })
 }
 
