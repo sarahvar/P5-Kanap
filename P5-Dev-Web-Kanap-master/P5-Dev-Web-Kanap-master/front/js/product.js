@@ -66,17 +66,25 @@ if (button != null) {
 button.addEventListener("click", (e) => {
     const color = document.querySelector("#colors").value
     const quantity = document.querySelector("#quantity").value
-    if (color == null || color === "" || quantity == null ||quantity == 0) {
-        alert("S'il vous plaît selectionnez une couleur ET une quantité")
-    }
+    if (isCartInvalid(color,quantity))
+    saveCart(color, quantity)
+    window.location.href = "cart.html"
+})
+}
+function saveCart(color, quantity) {
     const data= {
         _id: _id,
         color: color,
         quantity: Number (quantity),
         price: itemPrice,
+        imageUrl: imgUrl,
+        altTxt: altText,
     }
     localStorage.setItem(_id, JSON.stringify (data))
-    window.location.href = "cart.html"
-})
 }
-
+function isCartInvalid(color,quantity){
+    if (color == null || color === "" || quantity == null ||quantity == 0) {
+        alert("S'il vous plaît selectionnez une couleur ET une quantité")
+        return true
+    }
+}
