@@ -1,7 +1,7 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString)
 const _id = urlParams.get("_id")
-if (id != null){
+if (_id != null){
     let itemPrice = 0
 }
 
@@ -69,7 +69,7 @@ button.addEventListener("click", (e) => {
     const data= {
         _id: _id,
         color: color,
-        quantity: quantity,
+        quantity: Number (quantity),
         price: itemPrice,
     }
     localStorage.setItem(_id, JSON.stringify (data))
