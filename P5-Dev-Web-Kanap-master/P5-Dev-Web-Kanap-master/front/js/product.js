@@ -25,3 +25,8 @@ function makeTitle(name){
     const h1 = document.querySelector("#title")
     if (h1 != null) h1.textContent = name
 }
+
+function makePrice(price){
+    const span = document.querySelector("#price")
+    if (span != null) span.textContent = price
+}
