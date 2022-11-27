@@ -73,6 +73,7 @@ button.addEventListener("click", (e) => {
         price: itemPrice,
     }
     localStorage.setItem(_id, JSON.stringify (data))
+    window.location.href = "cart.html"
 })
 }
 
