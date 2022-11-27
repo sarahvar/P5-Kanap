@@ -3,6 +3,7 @@ const urlParams = new URLSearchParams(queryString)
 const _id = urlParams.get("_id")
 if (_id != null){
     let itemPrice = 0
+    let imgUrl, altText
 }
 
 fetch(`http://localhost:3000/api/products/${_id}`)
@@ -16,6 +17,8 @@ fetch(`http://localhost:3000/api/products/${_id}`)
 function handleData(kanap){
     const { altTxt, colors, description, imageUrl, name, price,} = kanap
     itemPrice = price
+    imgUrl = imageUrl
+    altText = altTxt
     makeImage(imageUrl, altTxt)
     makeTitle(name)
     makePrice(price)
