@@ -54,7 +54,7 @@ function makeCartContent(item){
     cardItemContent.classList.add("cart__item__content")
 
     const description = makeDescription(item)
-    const settings = makeSettings() 
+    const settings = makeSettings(item) 
 
     cardItemContent.appendChild(description)
     cardItemContent.appendChild(settings)
@@ -81,14 +81,14 @@ function makeDescription(item){
     return description
 }
 
-function makeSettings(){
+function makeSettings(item){
     const settings = document.createElement("div")
     settings.classList.add("cart__item__content__settings")
 
-    addQuantityToSettings(settings)
+    addQuantityToSettings(settings, item)
     return settings
 }
-function addQuantityToSettings(settings){
+function addQuantityToSettings(settings, item){
     const quantity = document.createElement("div")
     quantity.classList.add("cart__item__content__settings__quantity")
     const p = document.createElement("p")
@@ -100,10 +100,8 @@ function addQuantityToSettings(settings){
     input.name = "itemQuantity"
     input.min = "1"
     input.max = "100"
-    input.value = "42"
-
-
-
+    input.value = item.quantity
+    settings.appendChild(input)
 }
 
 function displayArticle(article){
