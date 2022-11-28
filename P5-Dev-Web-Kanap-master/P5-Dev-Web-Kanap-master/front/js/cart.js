@@ -21,8 +21,13 @@ for (let i = 0; i < numberOfItems; i++){
 }
 function displayItem(item){
     const article = makeArticle(item)
+    displayArticle(article)
     console.log(article)
     const image = makeImage(item)
+}
+function displayArticle(article){
+    document.querySelector("#cart__items").appendChild
+    (article)
 }
 function makeArticle(item){
     const article = document.createElement("article")
