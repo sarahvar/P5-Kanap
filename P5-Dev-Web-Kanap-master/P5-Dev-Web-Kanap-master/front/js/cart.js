@@ -93,7 +93,8 @@ function addQuantityToSettings(settings){
     quantity.classList.add("cart__item__content__settings__quantity")
     const p = document.createElement("p")
     p.textContent="Qté : "
-
+    quantity.appendChild(p)
+    const input =document.createElement("input")
 }
 
 function displayArticle(article){
