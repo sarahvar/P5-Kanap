@@ -42,11 +42,10 @@ function displayItem(item){
     console.log(article)
     const imageDiv = makeImageDiv(item)
     article.appendChild(imageDiv)
-
     const cardItemContent = makeCartContent(item)
     article.appendChild(cardItemContent)
-
     displayArticle(article)
+    displayTotalQuantity(item)
 }
 
 function makeCartContent(item){
@@ -112,6 +111,12 @@ function addDeleteToSettings(settings){
     div.appendChild(p)
     settings.appendChild(div)
 }
+
+function displayTotalQuantity(item){
+    const totalQuantity = document.querySelector("#totalQuantity")
+    totalQuantity.textContent = item.quantity
+}
+
 function displayArticle(article){
     document.querySelector("#cart__items").appendChild(article)
 }
