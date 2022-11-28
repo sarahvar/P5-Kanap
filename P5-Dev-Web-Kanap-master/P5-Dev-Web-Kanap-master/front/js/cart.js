@@ -131,6 +131,8 @@ function displayTotalPrice(){
 
 function updatePriceAndQuantity(_id){
   console.log(_id)
+  const itemToUpdate = cart.find((item) => item._id === _id)
+  console.log("itemToUpdate", itemToUpdate)
 
 }
 
