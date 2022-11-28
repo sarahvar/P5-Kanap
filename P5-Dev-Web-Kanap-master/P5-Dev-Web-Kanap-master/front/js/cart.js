@@ -57,8 +57,9 @@ function makeCartContent(item){
     const settings = makeSettings() 
 
     cardItemContent.appendChild(description)
+    cardItemContent.appendChild(settings)
     return cardItemContent
-    //cardItemContent.appendChild(settings)
+    
 }
 
 function makeDescription(item){
@@ -80,8 +81,19 @@ function makeDescription(item){
     return description
 }
 
-function makeSettings(item){
-    return""
+function makeSettings(){
+    const settings = document.createElement("div")
+    settings.classList.add("cart__item__content__settings")
+
+    addQuantityToSettings(settings)
+    return settings
+}
+function addQuantityToSettings(settings){
+    const quantity = document.createElement("div")
+    quantity.classList.add("cart__item__content__settings__quantity")
+    const p = document.createElement("p")
+    p.textContent="Qté : "
+
 }
 
 function displayArticle(article){
