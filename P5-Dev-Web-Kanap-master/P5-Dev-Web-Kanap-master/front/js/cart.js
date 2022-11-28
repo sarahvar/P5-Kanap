@@ -25,7 +25,15 @@ function displayItem(item){
     console.log(article)
     const div = makeImageDiv(item)
     article.appendChild(div)
+
+    const cardItemContent = makeCardItemContent(item)
 }
+function makeCardItemContent(item){
+    const div = document.createElement("div")
+    
+
+}
+
 function displayArticle(article){
     document.querySelector("#cart__items").appendChild(article)
 }
