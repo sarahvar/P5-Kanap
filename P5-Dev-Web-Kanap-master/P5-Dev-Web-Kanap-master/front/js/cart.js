@@ -23,11 +23,11 @@ function displayItem(item){
     const article = makeArticle(item)
     displayArticle(article)
     console.log(article)
-    const image = makeImage(item)
+    const div = makeImageDiv(item)
+    article.appendChild(div)
 }
 function displayArticle(article){
-    document.querySelector("#cart__items").appendChild
-    (article)
+    document.querySelector("#cart__items").appendChild(article)
 }
 function makeArticle(item){
     const article = document.createElement("article")
@@ -37,9 +37,13 @@ function makeArticle(item){
     return article
 }
 
-function makeImage(item){
+function makeImageDiv(item){
+    const div = document.createElement ("div")
+    div.classList.add("cart__item__img")
+
     const image = document.createElement('img')
     image.src = item.imageUrl
     image.alt = item.altTxt
-    return image
+    div.appendChild(image)
+    return div
 }
