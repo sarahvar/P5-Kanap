@@ -101,7 +101,8 @@ function addQuantityToSettings(settings, item){
     input.min = "1"
     input.max = "100"
     input.value = item.quantity
-    settings.appendChild(input)
+    quantity.appendChild(input)
+    settings.appendChild(quantity)
 }
 function addDeleteToSettings(settings){
     const div = document.createElement("div")
@@ -113,8 +114,13 @@ function addDeleteToSettings(settings){
 }
 
 function displayTotalQuantity(item){
+    let total = 0
     const totalQuantity = document.querySelector("#totalQuantity")
-    totalQuantity.textContent = item.quantity
+    cart.forEach(item => {
+      const totalUnitPrice =  item.price * item.quantity
+      total = total + totalUnitPrice
+    })
+    console.log(total)
 }
 
 function displayArticle(article){
