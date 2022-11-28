@@ -23,7 +23,7 @@ function handleData(kanap){
     makeImage(imageUrl, altTxt)
     makeTitle(name)
     makePrice(price)
-    makeDescription(description)
+    makeCartContent(description)
     makeColors(colors)
 }
 function makeImage(imageUrl, altTxt){
@@ -44,7 +44,7 @@ function makePrice(price){
     if (span != null) span.textContent = price
 }
 
-function makeDescription(description){
+function makeCartContent(description){
     const p = document.querySelector("#description")
     if ( p != null) p.textContent = description
 }

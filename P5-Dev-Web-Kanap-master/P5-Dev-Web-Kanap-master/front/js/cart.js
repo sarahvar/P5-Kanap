@@ -43,7 +43,7 @@ function displayItem(item){
     const imageDiv = makeImageDiv(item)
     article.appendChild(imageDiv)
 
-    const cardItemContent = makeDescription(imageDiv,item)
+    const cardItemContent = makeCartContent(imageDiv,item)
     article.appendChild(cardItemContent)
     displayArticle(article)
 }
@@ -52,10 +52,15 @@ function makeCardItemContent(item){
     const div = document.createElement("div")
     div.classList.add("cart__item__content")
 
-    makeDescription(div, item)
+    makeCartContent(div, item)
 }
 
-function makeDescription(div,item){
+function makeCartContent(div,item){
+    const description = makeDescription(item)
+    const settings = makeSettings(item) 
+}
+
+function makeDescription(item){
     const description = document.createElement("div")
     div.classList.add("cart__item__content__description")
 
@@ -73,6 +78,10 @@ function makeDescription(div,item){
     description.appendChild(p2)
     div.appendChild(description)
     return div
+}
+
+function makeSettings(item){
+
 }
 
 function displayArticle(article){
