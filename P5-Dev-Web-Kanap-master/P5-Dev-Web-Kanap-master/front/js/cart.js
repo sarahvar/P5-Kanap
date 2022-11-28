@@ -31,7 +31,7 @@ cart.forEach((item) => displayItem(item))
 function retrieveItemsFromCache(){
     const numberOfItems = localStorage.length;
 for (let i = 0; i < numberOfItems; i++){
-    const item = localStorage.getItem(localStorage.key(i))
+    const item = localStorage.getItem(localStorage.key(i)) || ""
     const itemObject = JSON.parse(item)
     cart.push(itemObject)
 }
@@ -43,26 +43,27 @@ function displayItem(item){
     const imageDiv = makeImageDiv(item)
     article.appendChild(imageDiv)
 
-    const cardItemContent = makeCartContent(imageDiv,item)
+    const cardItemContent = makeCartContent(item)
     article.appendChild(cardItemContent)
+
     displayArticle(article)
 }
 
-function makeCardItemContent(item){
-    const div = document.createElement("div")
-    div.classList.add("cart__item__content")
+function makeCartContent(item){
+    const cardItemContent = document.createElement("div")
+    cardItemContent.classList.add("cart__item__content")
 
-    makeCartContent(div, item)
-}
-
-function makeCartContent(div,item){
     const description = makeDescription(item)
-    const settings = makeSettings(item) 
+    const settings = makeSettings() 
+
+    cardItemContent.appendChild(description)
+    return cardItemContent
+    //cardItemContent.appendChild(settings)
 }
 
 function makeDescription(item){
     const description = document.createElement("div")
-    div.classList.add("cart__item__content__description")
+    description.classList.add("cart__item__content__description")
 
     const h2 = document.createElement("h2")
     h2.textContent = item.name
@@ -76,12 +77,11 @@ function makeDescription(item){
     description.appendChild(h2)
     description.appendChild(p)
     description.appendChild(p2)
-    div.appendChild(description)
-    return div
+    return description
 }
 
 function makeSettings(item){
-
+    return""
 }
 
 function displayArticle(article){
