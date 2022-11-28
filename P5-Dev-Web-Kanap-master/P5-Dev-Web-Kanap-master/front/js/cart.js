@@ -95,6 +95,15 @@ function addQuantityToSettings(settings){
     p.textContent="Qté : "
     quantity.appendChild(p)
     const input =document.createElement("input")
+    input.type = "number"
+    input.classList.add = ("itemQuantity")
+    input.name = "itemQuantity"
+    input.min = "1"
+    input.max = "100"
+    input.value = "42"
+
+
+
 }
 
 function displayArticle(article){
