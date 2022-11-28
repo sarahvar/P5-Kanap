@@ -45,7 +45,7 @@ function displayItem(item){
     const cardItemContent = makeCartContent(item)
     article.appendChild(cardItemContent)
     displayArticle(article)
-    displayTotalQuantity(item)
+    displayTotalPrice(item)
 }
 
 function makeCartContent(item){
@@ -113,14 +113,15 @@ function addDeleteToSettings(settings){
     settings.appendChild(div)
 }
 
-function displayTotalQuantity(item){
+function displayTotalPrice(item){
     let total = 0
-    const totalQuantity = document.querySelector("#totalQuantity")
+    const totalQuantity = document.querySelector("#totalPrice")
     cart.forEach(item => {
       const totalUnitPrice =  item.price * item.quantity
-      total = total + totalUnitPrice
+      total += totalUnitPrice
     })
     console.log(total)
+    totalQuantity.textContent = total
 }
 
 function displayArticle(article){
