@@ -47,7 +47,9 @@ function makeCardItemContent(item){
     const p2 = document.createElement("p")
     p2.textContent = item.price + " €"
 
-    description.appendChild(h2, p,p2)
+    description.appendChild(h2)
+    description.appendChild(p)
+    description.appendChild(p2)
     div.appendChild(description)
     return div
 }
