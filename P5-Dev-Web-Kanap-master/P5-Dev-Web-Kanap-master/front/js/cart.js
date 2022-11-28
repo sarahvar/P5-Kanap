@@ -39,7 +39,6 @@ for (let i = 0; i < numberOfItems; i++){
 
 function displayItem(item){
     const article = makeArticle(item)
-    console.log(article)
     const imageDiv = makeImageDiv(item)
     article.appendChild(imageDiv)
     const cardItemContent = makeCartContent(item)
@@ -102,6 +101,7 @@ function addQuantityToSettings(settings, item){
     input.min = "1"
     input.max = "100"
     input.value = item.quantity
+    input.addEventListener("input", () => updatePriceAndQuantity(item._id))
     quantity.appendChild(input)
     settings.appendChild(quantity)
 }
@@ -117,6 +117,7 @@ function addDeleteToSettings(settings){
 function displayTotalQuantity(){
   const totalQuantity = document.querySelector("#totalQuantity")
   const total = cart.reduce((total, item) => total + item.quantity,0)
+  totalQuantity.textContent = total
 }
 
 function displayTotalPrice(){
@@ -126,8 +127,11 @@ function displayTotalPrice(){
       const totalUnitPrice =  item.price * item.quantity
       total += totalUnitPrice
     })
-    console.log(total)
-    totalQuantity.textContent = total
+}
+
+function updatePriceAndQuantity(_id){
+  console.log(_id)
+
 }
 
 function displayArticle(article){
