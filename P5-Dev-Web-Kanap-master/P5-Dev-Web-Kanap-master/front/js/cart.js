@@ -86,7 +86,7 @@ function makeSettings(item){
     settings.classList.add("cart__item__content__settings")
 
     addQuantityToSettings(settings, item)
-    addDeleteToSettings(settings, item)
+    addDeleteToSettings(settings)
     return settings
 }
 function addQuantityToSettings(settings, item){
@@ -104,8 +104,13 @@ function addQuantityToSettings(settings, item){
     input.value = item.quantity
     settings.appendChild(input)
 }
-function addDeleteToSettings(settings, item){
-    
+function addDeleteToSettings(settings){
+    const div = document.createElement("div")
+    div.classList.add("cart__item__content__settings__delete")
+    const p = document.createElement("p")
+    p.textContent = "Supprimer"
+    div.appendChild(p)
+    settings.appendChild(div)
 }
 function displayArticle(article){
     document.querySelector("#cart__items").appendChild(article)
