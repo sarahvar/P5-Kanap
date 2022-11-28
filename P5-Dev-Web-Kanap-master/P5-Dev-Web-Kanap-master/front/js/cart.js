@@ -86,6 +86,7 @@ function makeSettings(item){
     settings.classList.add("cart__item__content__settings")
 
     addQuantityToSettings(settings, item)
+    addDeleteToSettings(settings, item)
     return settings
 }
 function addQuantityToSettings(settings, item){
@@ -103,7 +104,9 @@ function addQuantityToSettings(settings, item){
     input.value = item.quantity
     settings.appendChild(input)
 }
-
+function addDeleteToSettings(settings, item){
+    
+}
 function displayArticle(article){
     document.querySelector("#cart__items").appendChild(article)
 }
