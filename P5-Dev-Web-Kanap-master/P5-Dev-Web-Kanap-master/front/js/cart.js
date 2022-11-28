@@ -4,14 +4,29 @@ retrieveItemsFromCache()
 console.log(cart)
 cart.forEach((item) => displayItem(item))
 
-//altTxt: "Photo d'un canapé bleu, deux places"
-//color: "White"
-//imageUrl: "http://localhost:3000/images/kanap01.jpeg"
-//name: "Kanap Sinopé"
-//price: 1849
-//quantity: 3
-//_id: "107fb5b75607497b96722bda5b504926"
 
+//<!--  <article class="cart__item" data-id="{product-ID}" data-color="{product-color}">
+                //<div class="cart__item__img">
+                  //<img src="../images/product01.jpg" alt="Photographie d'un canapé">
+                //</div>
+                //<div class="cart__item__content">
+                  //<div class="cart__item__content__description">
+                    //<h2>Nom du produit</h2>
+                    //<p>Vert</p>
+                    //<p>42,00 €</p>
+                  //</div>
+                  //<div class="cart__item__content__settings">
+                    //<div class="cart__item__content__settings__quantity">
+                      //<p>Qté : </p>
+                      //<input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="42">
+                    //</div>
+                    //<div class="cart__item__content__settings__delete">
+                      //<p class="deleteItem">Supprimer</p>
+                    //</div>
+                  //</div>
+                //</div>
+              //</article> -->
+            //</section>
 
 function retrieveItemsFromCache(){
     const numberOfItems = localStorage.length;
@@ -21,20 +36,26 @@ for (let i = 0; i < numberOfItems; i++){
     cart.push(itemObject)
 }
 }
+
 function displayItem(item){
     const article = makeArticle(item)
-    displayArticle(article)
     console.log(article)
-    const div = makeImageDiv(item)
-    article.appendChild(div)
+    const imageDiv = makeImageDiv(item)
+    article.appendChild(imageDiv)
 
-    const cardItemContent = makeCardItemContent(item)
+    const cardItemContent = makeDescription(imageDiv,item)
     article.appendChild(cardItemContent)
+    displayArticle(article)
 }
+
 function makeCardItemContent(item){
     const div = document.createElement("div")
     div.classList.add("cart__item__content")
 
+    makeDescription(div, item)
+}
+
+function makeDescription(div,item){
     const description = document.createElement("div")
     div.classList.add("cart__item__content__description")
 
@@ -57,6 +78,7 @@ function makeCardItemContent(item){
 function displayArticle(article){
     document.querySelector("#cart__items").appendChild(article)
 }
+
 function makeArticle(item){
     const article = document.createElement("article")
     article.classList.add("card__item")
