@@ -45,7 +45,7 @@ function displayItem(item){
     article.appendChild(cardItemContent)
     displayArticle(article)
     displayTotalQuantity()
-    displayTotalPrice(item)
+    displayTotalPrice()
 }
 
 function makeCartContent(item){
@@ -121,12 +121,9 @@ function displayTotalQuantity(){
 }
 
 function displayTotalPrice(){
-    let total = 0
-    const totalQuantity = document.querySelector("#totalPrice")
-    cart.forEach(item => {
-      const totalUnitPrice =  item.price * item.quantity
-      total += totalUnitPrice
-    })
+    const totalPrice = document.querySelector("#totalPrice")
+    const total = cart.reduce((total, item) => total + item.price * item.quantity,0)
+    totalPrice.textContent = total
 }
 
 function updatePriceAndQuantity(_id, newValue){
