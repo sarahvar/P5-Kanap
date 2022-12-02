@@ -87,7 +87,7 @@ function saveOrder(color, quantity) {
     localStorage.setItem(_id, JSON.stringify (data))
 }
 function isOrderInvalid(color,quantity){
-    if (color == null || color === "" || quantity == null ||quantity <= 0 || quantity >= 101) {
+    if (color == null || color === "" || quantity == null ||quantity <= 0 || quantity >= 100) {
         alert("S'il vous plaît selectionnez une couleur ET une quantité")
         return true
     }
