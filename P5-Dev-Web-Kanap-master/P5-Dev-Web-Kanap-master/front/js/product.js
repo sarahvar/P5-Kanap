@@ -15,10 +15,11 @@ fetch(`http://localhost:3000/api/products/${_id}`)
     
     
 function handleData(kanap){
-    const { altTxt, colors, description, imageUrl, name,price } = kanap
+    const { altTxt, colors, description, imageUrl, name, price } = kanap
     imgUrl = imageUrl
     altText = altTxt
     articleName = name
+    itemPrice = price
     makeImage(imageUrl, altTxt)
     makeTitle(name)
     makePrice(price)
