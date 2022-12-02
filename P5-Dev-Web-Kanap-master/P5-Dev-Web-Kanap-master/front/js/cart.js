@@ -85,7 +85,7 @@ function makeSettings(item){
     settings.classList.add("cart__item__content__settings")
 
     addQuantityToSettings(settings, item)
-    addDeleteToSettings(settings, item)
+    addDeleteToSettings(settings)
     return settings
 }
 function addQuantityToSettings(settings, item){
@@ -105,19 +105,13 @@ function addQuantityToSettings(settings, item){
     quantity.appendChild(input)
     settings.appendChild(quantity)
 }
-function addDeleteToSettings(settings, item){
+function addDeleteToSettings(settings){
     const div = document.createElement("div")
     div.classList.add("cart__item__content__settings__delete")
-    div.addEventListener("click", () => deleteItem (item))
     const p = document.createElement("p")
     p.textContent = "Supprimer"
     div.appendChild(p)
     settings.appendChild(div)
-}
-
-function deleteItem(item){
-const itemToDelete = cart.find(product => product._id === item._id)
-console.log("item to delete", itemToDelete)
 }
 
 function displayTotalQuantity(){
@@ -130,7 +124,6 @@ function displayTotalPrice(){
     const totalPrice = document.querySelector("#totalPrice")
     const total = cart.reduce((total, item) => total + item.price * item.quantity,0)
     totalPrice.textContent = total
-    console.log(cart)
 }
 
 function updatePriceAndQuantity(_id, newValue){
