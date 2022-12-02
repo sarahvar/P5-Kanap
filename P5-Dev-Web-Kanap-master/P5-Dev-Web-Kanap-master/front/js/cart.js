@@ -120,6 +120,11 @@ function displayTotalQuantity(){
   totalQuantity.textContent = total
 }
 
+function makePrice(price){
+  const span = document.querySelector("#price")
+  if (span != null) span.textContent = price
+}
+
 function displayTotalPrice(){
     const totalPrice = document.querySelector("#totalPrice")
     const total = cart.reduce((total, item) => total + item.price * item.quantity,0)
