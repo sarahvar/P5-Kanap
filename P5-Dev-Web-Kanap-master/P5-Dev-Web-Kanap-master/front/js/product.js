@@ -15,7 +15,7 @@ fetch(`http://localhost:3000/api/products/${_id}`)
     
     
 function handleData(kanap){
-    const { altTxt, colors, description, imageUrl, name,} = kanap
+    const { altTxt, colors, description, imageUrl, name, price} = kanap
     imgUrl = imageUrl
     altText = altTxt
     articleName = name
