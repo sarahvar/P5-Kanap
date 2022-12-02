@@ -39,6 +39,11 @@ function makeTitle(name){
     if (h1 != null) h1.textContent = name
 }
 
+function makePrice(price){
+    const span = document.querySelector("#price")
+    if (span != null) span.textContent = price
+}
+
 function makeCartContent(description){
     const p = document.querySelector("#description")
     if ( p != null) p.textContent = description
@@ -53,7 +58,6 @@ function makeColors(colors){
             option.textContent = color
             select.appendChild(option)
         })
-    
     }
 }
 
@@ -76,6 +80,7 @@ function saveOrder(color, quantity) {
         _id: _id,
         color: color,
         quantity: Number (quantity),
+        price : itemPrice,
         imageUrl: imgUrl,
         altTxt: altText,
         name: articleName

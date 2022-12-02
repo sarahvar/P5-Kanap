@@ -85,7 +85,7 @@ function makeSettings(item){
     settings.classList.add("cart__item__content__settings")
 
     addQuantityToSettings(settings, item)
-    addDeleteToSettings(settings)
+    addDeleteToSettings(settings, item)
     return settings
 }
 function addQuantityToSettings(settings, item){
@@ -101,17 +101,23 @@ function addQuantityToSettings(settings, item){
     input.min = "1"
     input.max = "100"
     input.value = item.quantity
-    input.addEventListener("input", () => updatePriceAndQuantity(item._id, input.value,))
+    input.addEventListener("input", () => updatePriceAndQuantity(item._id, input.value))
     quantity.appendChild(input)
     settings.appendChild(quantity)
 }
-function addDeleteToSettings(settings){
+function addDeleteToSettings(settings, item){
     const div = document.createElement("div")
     div.classList.add("cart__item__content__settings__delete")
+    div.addEventListener("click", () => deleteItem (item))
     const p = document.createElement("p")
     p.textContent = "Supprimer"
     div.appendChild(p)
     settings.appendChild(div)
+}
+
+function deleteItem(item){
+const itemToDelete = cart.find(product => product._id === item._id)
+console.log("item to delete", itemToDelete)
 }
 
 function displayTotalQuantity(){
@@ -120,16 +126,11 @@ function displayTotalQuantity(){
   totalQuantity.textContent = total
 }
 
-function makePrice(price){
-  const span = document.querySelector("#price")
-  if (span != null) span.textContent = price
-}
-
 function displayTotalPrice(){
     const totalPrice = document.querySelector("#totalPrice")
     const total = cart.reduce((total, item) => total + item.price * item.quantity,0)
     totalPrice.textContent = total
-    console.log(total)
+    console.log(cart)
 }
 
 function updatePriceAndQuantity(_id, newValue){
