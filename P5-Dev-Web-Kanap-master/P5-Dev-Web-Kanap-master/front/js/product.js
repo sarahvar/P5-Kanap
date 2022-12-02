@@ -15,8 +15,7 @@ fetch(`http://localhost:3000/api/products/${_id}`)
     
     
 function handleData(kanap){
-    const { altTxt, colors, description, imageUrl, name, price,} = kanap
-    itemPrice = price
+    const { altTxt, colors, description, imageUrl, name,} = kanap
     imgUrl = imageUrl
     altText = altTxt
     articleName = name
@@ -81,7 +80,6 @@ function saveOrder(color, quantity) {
         _id: _id,
         color: color,
         quantity: Number (quantity),
-        price: itemPrice,
         imageUrl: imgUrl,
         altTxt: altText,
         name: articleName
@@ -89,7 +87,7 @@ function saveOrder(color, quantity) {
     localStorage.setItem(_id, JSON.stringify (data))
 }
 function isOrderInvalid(color,quantity){
-    if (color == null || color === "" || quantity == null ||quantity <= 0) {
+    if (color == null || color === "" || quantity == null ||quantity <= 0 || quantity >= 100) {
         alert("S'il vous plaît selectionnez une couleur ET une quantité")
         return true
     }
