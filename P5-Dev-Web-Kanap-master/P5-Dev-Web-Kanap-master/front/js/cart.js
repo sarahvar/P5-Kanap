@@ -5,6 +5,19 @@ console.log(cart)
 cart.forEach((item) => displayItem(item))
 
 
+
+fetch(`http://localhost:3000/api/products/${_id}`)
+	.then((response) => response.json())
+    .then((res) => handleData(res))
+    .catch((error) => {
+        console.log(error);   
+    });
+    
+    const _id = urlParams.get("_id")
+    if (_id != null){
+        let itemPrice = 0
+    }
+
 //<!--  <article class="cart__item" data-id="{product-ID}" data-color="{product-color}">
                 //<div class="cart__item__img">
                   //<img src="../images/product01.jpg" alt="Photographie d'un canapé">
@@ -54,6 +67,8 @@ function makeCartContent(item){
 
     const description = makeDescription(item)
     const settings = makeSettings(item) 
+    
+    const span = makePrice(price)
 
     cardItemContent.appendChild(description)
     cardItemContent.appendChild(settings)
@@ -78,6 +93,12 @@ function makeDescription(item){
     description.appendChild(p)
     description.appendChild(p2)
     return description
+}
+
+function makePrice(price){
+  const span = document.querySelector("#price")
+  if (span != null) span.textContent = price
+  console.log(span)
 }
 
 function makeSettings(item){
