@@ -14,7 +14,7 @@ fetch(`http://localhost:3000/api/products/${_id}`)
     
     
 function handleData(kanap){
-    const { altTxt, colors, description, imageUrl, name,} = kanap
+    const { altTxt, colors, description, imageUrl, name, price} = kanap
     imgUrl = imageUrl
     altText = altTxt
     articleName = name
@@ -38,6 +38,7 @@ function makeTitle(name){
 function makePrice(price){
     const span = document.querySelector("#price")
     if (span != null) span.textContent = price
+    console.log(span)
 }
 function makeCartContent(description){
     const p = document.querySelector("#description")
