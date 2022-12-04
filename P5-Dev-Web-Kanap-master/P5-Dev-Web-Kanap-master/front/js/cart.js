@@ -82,10 +82,25 @@ function addQuantityToSettings(settings, item){
     input.min = "1"
     input.max = "100"
     input.value = item.quantity
-    input.addEventListener("input", () => updatePriceAndQuantity(item._id, input.value, item))
+    input.addEventListener("input", () => updatePriceAndQuantity(item._id, input.value,item))
     quantity.appendChild(input)
     settings.appendChild(quantity)
 }
+function updatePriceAndQuantity(_id, newValue,item){
+  const itemToUpdate = cart.find((item) => item._id === _id)
+  itemToUpdate.quantity = Number (newValue)
+  item.quantity = itemToUpdate.quantity
+  displayTotalQuantity()
+  displayTotalPrice()
+  saveNewDataToCache(item)
+}
+
+function saveNewDataToCache(item) {
+  const dataToSave = JSON.stringify(item)
+  const key = `${item._id}-${item.color}`
+  localStorage.setItem(key, dataToSave)
+}
+
 function addDeleteToSettings(settings, item){
     const div = document.createElement("div")
     div.classList.add("cart__item__content__settings__delete")
@@ -117,22 +132,6 @@ function displayTotalPrice(){
     const totalPrice = document.querySelector("#totalPrice")
     const total = cart.reduce((total, item) => total + item.price * item.quantity,0)
     totalPrice.textContent = total
-}
-
-function updatePriceAndQuantity(_id, newValue,item){
-  const itemToUpdate = cart.find((item) => item._id === _id)
-  itemToUpdate.quantity = Number (newValue)
-  item.quantity = itemToUpdate.quantity
-  displayTotalPrice()
-  displayTotalQuantity()
-  saveNewDataToCache(item)
-  console.log(cart)
-}
-
-function saveNewDataToCache(item){
-  const dataToSave = JSON.stringify(item)
-  const key = `${item._id}-${item.color}`
-  localStorage.setItem(dataToSave, key)
 }
 
 function displayArticle(article){
