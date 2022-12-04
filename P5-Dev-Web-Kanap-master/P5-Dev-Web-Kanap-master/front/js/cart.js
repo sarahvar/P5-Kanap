@@ -173,6 +173,28 @@ function submitForm(e){
     e.preventDefault()
     if (cart.length === 0) alert ("s'il vous plaît veuillez acheter un produit")
     const form = document.querySelector(".cart__order__form")
-    
-    console.log(form.elements)
+    const body = makeRequestBody()
+    fetch("http:localhost:3000/api/products/order", {
+        method: "POST",
+        body : JSON.stringify(body),
+        header : {
+            "Content-Type": "application/json"
+        }
+    })
+        .then((res) => res.json())
+        .then ((data) => console.log(data)) 
+}
+
+function makeRequestBody(){
+    const body = {
+        contact :{
+            firstName : "kanap",
+            lastName :  "kanap",
+            address : "dodo",
+            city : "pouet",
+            email : "pouet pouet"
+        }, 
+    products : ["107fb5b75607497b96722bda5b504926"]
+    }
+    return body
 }
