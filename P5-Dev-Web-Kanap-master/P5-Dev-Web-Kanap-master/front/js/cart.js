@@ -126,13 +126,13 @@ function deleteItem(item){
   displayTotalQuantity()
   deleteDataFromCache(item)
   deleteArticleFromPage(item)
-  console.log(cart)
 }
 
 function deleteArticleFromPage(item){
     const articleToDelete = document.querySelector(
         `article[data-id="${item._id}"][data-color="${item.color}]`
     )
+    console.log("article supprimer", articleToDelete)
     articleToDelete.remove()
 }
 
