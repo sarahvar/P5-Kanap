@@ -4,7 +4,7 @@ retrieveItemsFromCache()
 cart.forEach((item) => displayItem(item))
 
 const orderButton = document.querySelector("#order")
-orderButton.addEventListener("click", () => submitForm())
+orderButton.addEventListener("click", (e) => submitForm(e))
 
 function retrieveItemsFromCache(){
     const numberOfItems = localStorage.length;
@@ -169,7 +169,10 @@ function makeImageDiv(item){
 
                                     //FORMULAIRE//
 
-function submitForm(){
-    const form = document.querySelector("#form")
-    form.submit()
+function submitForm(e){
+    e.preventDefault()
+    if (cart.length === 0) alert ("s'il vous plaît veuillez acheter un produit")
+    const form = document.querySelector(".cart__order__form")
+    
+    console.log(form.elements)
 }
