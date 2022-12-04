@@ -134,8 +134,9 @@ function displayTotalPrice(){
     totalPrice.textContent = total
 }
 
-function deleItem(item){
-  console.log("item to delete", item)
+function deleteItem(item){
+ const itemToDelete = cart.find(product => product.id === item.id && product.color === item.color)
+ console.log("item to delete", itemToDelete)
 }
 
 function updatePriceAndQuantity(_id, newValue){
