@@ -85,12 +85,12 @@ function makeDescription(item){
     const p = document.createElement("p")
     p.textContent = item.color
 
-    const p2 = document.createElement("p")
-    p2.textContent = `${p2.textContent}` + " €"
+    const span = document.createElement("p")
+    span.textContent = `${span.textContent}` + " €"
 
     description.appendChild(h2)
     description.appendChild(p)
-    description.appendChild(p2)
+    description.appendChild(span)
     return description
 }
 
