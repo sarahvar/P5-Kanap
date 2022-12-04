@@ -92,10 +92,16 @@ function updatePriceAndQuantity(_id, newValue,item){
   item.quantity = itemToUpdate.quantity
   displayTotalQuantity()
   displayTotalPrice()
-  saveNewDataToCache(item)
+  deleteDataFromCache(item)
+}
+
+function deleteDataFromCache(item){
+    const key = `${item._id}-${item.color}`
+    localStorage.removeItem(key)
 }
 
 function saveNewDataToCache(item) {
+    console.log("item to delete", item)
   const dataToSave = JSON.stringify(item)
   const key = `${item._id}-${item.color}`
   localStorage.setItem(key, dataToSave)
