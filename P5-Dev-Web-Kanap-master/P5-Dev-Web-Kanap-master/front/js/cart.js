@@ -86,7 +86,7 @@ function makeDescription(item){
     p.textContent = item.color
 
     const p2 = document.createElement("p")
-    p2.textContent = `${p2}` + " €"
+    p2.textContent = `${p2.textContent}` + " €"
 
     description.appendChild(h2)
     description.appendChild(p)
