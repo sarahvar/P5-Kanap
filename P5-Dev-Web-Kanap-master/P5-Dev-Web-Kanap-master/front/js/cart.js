@@ -92,16 +92,16 @@ function updatePriceAndQuantity(_id, newValue,item){
   item.quantity = itemToUpdate.quantity
   displayTotalQuantity()
   displayTotalPrice()
-  deleteDataFromCache(item)
+  saveNewDataToCache(item)
 }
 
 function deleteDataFromCache(item){
     const key = `${item._id}-${item.color}`
+    console.log("on retire cette key", key)
     localStorage.removeItem(key)
 }
 
 function saveNewDataToCache(item) {
-    console.log("item to delete", item)
   const dataToSave = JSON.stringify(item)
   const key = `${item._id}-${item.color}`
   localStorage.setItem(key, dataToSave)
@@ -124,7 +124,7 @@ function deleteItem(item){
   cart.splice (itemToDelete, 1)
   displayTotalPrice ()
   displayTotalQuantity()
-  saveNewDataToCache(item)
+  deleteDataFromCache(item)
   console.log(cart)
 }
 
