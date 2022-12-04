@@ -135,8 +135,11 @@ function displayTotalPrice(){
 }
 
 function deleteItem(item){
- const itemToDelete = cart.find(product => product.id === item.id && product.color === item.color)
- console.log("item to delete", itemToDelete)
+ const itemToDelete = cart.findIndex(
+  (product) => product.id === item.id && product.color === item.color
+  )
+delete cart [itemToDelete]
+ console.log(cart)
 }
 
 function updatePriceAndQuantity(_id, newValue){
