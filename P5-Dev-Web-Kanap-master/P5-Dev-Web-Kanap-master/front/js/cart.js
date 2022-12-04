@@ -1,9 +1,10 @@
 const cart = [];
 
-
 retrieveItemsFromCache()
-console.log(cart)
 cart.forEach((item) => displayItem(item))
+
+const orderButton = document.querySelector("#order")
+orderButton.addEventListener("click", () => submitForm())
 
 function retrieveItemsFromCache(){
     const numberOfItems = localStorage.length;
@@ -56,11 +57,7 @@ function makeDescription(item){
     description.appendChild(span)
     return description
 }
-function makePrice(price){
-  const span = document.querySelector("#price")
-  if (span != null) span.textContent = price
-  console.log(span)
-}
+
 function makeSettings(item){
     const settings = document.createElement("div")
     settings.classList.add("cart__item__content__settings")
@@ -97,7 +94,6 @@ function updatePriceAndQuantity(_id, newValue,item){
 
 function deleteDataFromCache(item){
     const key = `${item._id}-${item.color}`
-    console.log("on retire cette key", key)
     localStorage.removeItem(key)
 }
 
@@ -110,7 +106,7 @@ function saveNewDataToCache(item) {
 function addDeleteToSettings(settings, item){
     const div = document.createElement("div")
     div.classList.add("cart__item__content__settings__delete")
-    div.addEventListener("click", () => deleteItem(item))
+    div.addEventListener("click", () => deleteItem (item))
 
 
     const p = document.createElement("p")
@@ -133,7 +129,7 @@ function deleteArticleFromPage(item){
         `article[data-id="${item._id}"][data-color="${item.color}]`
     )
     console.log("article supprimer", articleToDelete)
-    articleToDelete.remove()
+    articleToDelete.removeItem()
 }
 
 function displayTotalQuantity(){
@@ -169,4 +165,11 @@ function makeImageDiv(item){
     image.alt = item.altTxt
     div.appendChild(image)
     return div
+}
+
+                                    //FORMULAIRE//
+
+function submitForm(){
+    const form = document.querySelector("#form")
+    form.submit()
 }
