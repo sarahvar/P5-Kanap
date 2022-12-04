@@ -1,19 +1,6 @@
 const cart = [];
 
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString)
-const _id = urlParams.get("_id")
-if (_id != null){
-    let itemPrice = 0
-    let imgUrl, altText, articleName
-}
-fetch(`http://localhost:3000/api/products/${_id}`)
-    .then((res) => res.json())
-    .then((data) => addProducts(data))
-    .catch((error) => {
-        console.log(error);   
-    });
-    
+
 retrieveItemsFromCache()
 console.log(cart)
 cart.forEach((item) => displayItem(item))
@@ -86,20 +73,24 @@ function makeDescription(item){
     p.textContent = item.color
 
     const span = document.createElement("p")
-    span.textContent = `${span.textContent}` + " €"
+    span.textContent = item.price + " €"
 
     description.appendChild(h2)
     description.appendChild(p)
     description.appendChild(span)
     return description
 }
-
+function makePrice(price){
+  const span = document.querySelector("#price")
+  if (span != null) span.textContent = price
+  console.log(span)
+}
 function makeSettings(item){
     const settings = document.createElement("div")
     settings.classList.add("cart__item__content__settings")
 
     addQuantityToSettings(settings, item)
-    addDeleteToSettings(settings)
+    addDeleteToSettings(settings, item)
     return settings
 }
 function addQuantityToSettings(settings, item){
@@ -119,9 +110,12 @@ function addQuantityToSettings(settings, item){
     quantity.appendChild(input)
     settings.appendChild(quantity)
 }
-function addDeleteToSettings(settings){
+function addDeleteToSettings(settings, item){
     const div = document.createElement("div")
     div.classList.add("cart__item__content__settings__delete")
+    div.addEventListener("click", () => deleteItem(item))
+
+
     const p = document.createElement("p")
     p.textContent = "Supprimer"
     div.appendChild(p)
@@ -138,6 +132,10 @@ function displayTotalPrice(){
     const totalPrice = document.querySelector("#totalPrice")
     const total = cart.reduce((total, item) => total + item.price * item.quantity,0)
     totalPrice.textContent = total
+}
+
+function deleItem(item){
+  console.log("item to delete", item)
 }
 
 function updatePriceAndQuantity(_id, newValue){
