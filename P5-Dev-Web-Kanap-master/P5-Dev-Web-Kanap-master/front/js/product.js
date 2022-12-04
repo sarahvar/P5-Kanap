@@ -18,6 +18,7 @@ function handleData(kanap){
     imgUrl = imageUrl
     altText = altTxt
     articleName = name
+    itemPrice = price
     makeImage(imageUrl, altTxt)
     makeTitle(name)
     makePrice(price)

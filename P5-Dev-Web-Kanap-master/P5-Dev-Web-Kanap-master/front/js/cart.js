@@ -1,5 +1,19 @@
 const cart = [];
 
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString)
+const _id = urlParams.get("_id")
+if (_id != null){
+    let itemPrice = 0
+    let imgUrl, altText, articleName
+}
+fetch(`http://localhost:3000/api/products/${_id}`)
+    .then((res) => res.json())
+    .then((data) => addProducts(data))
+    .catch((error) => {
+        console.log(error);   
+    });
+    
 retrieveItemsFromCache()
 console.log(cart)
 cart.forEach((item) => displayItem(item))
@@ -72,14 +86,13 @@ function makeDescription(item){
     p.textContent = item.color
 
     const p2 = document.createElement("p")
-    p2.textContent = item.price + " €"
+    p2.textContent = `${p2}` + " €"
 
     description.appendChild(h2)
     description.appendChild(p)
     description.appendChild(p2)
     return description
 }
-
 
 function makeSettings(item){
     const settings = document.createElement("div")
