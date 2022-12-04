@@ -174,10 +174,10 @@ function submitForm(e){
     if (cart.length === 0) alert ("s'il vous plaît veuillez acheter un produit")
     const form = document.querySelector(".cart__order__form")
     const body = makeRequestBody()
-    fetch("http:localhost:3000/api/products/order", {
+    fetch("http://localhost:3000/api/products/order", {
         method: "POST",
-        body : JSON.stringify(body),
-        header : {
+        body: JSON.stringify(body),
+        headers: {
             "Content-Type": "application/json"
         }
     })
@@ -194,7 +194,7 @@ function makeRequestBody(){
             city : "pouet",
             email : "pouet pouet"
         }, 
-    products : ["107fb5b75607497b96722bda5b504926"]
+    products: ["107fb5b75607497b96722bda5b504926"]
     }
     return body
 }
