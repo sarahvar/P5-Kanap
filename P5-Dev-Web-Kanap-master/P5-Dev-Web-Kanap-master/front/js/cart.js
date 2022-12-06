@@ -176,7 +176,7 @@ function makeImageDiv(item){
 function submitForm(e){
     e.preventDefault()
     if (cart.length === 0) alert ("s'il vous plaît veuillez acheter un produit")
-    const form = document.querySelector(".cart__order__form")
+    
     const body = makeRequestBody()
     fetch("http://localhost:3000/api/products/order", {
         method: "POST",
@@ -191,6 +191,14 @@ function submitForm(e){
 }
 
 function makeRequestBody(){
+    const form = document.querySelector(".cart__order__form")
+    const firstName = form.elements.firstName.value
+    const lastName = form.elements.lastName.value
+    const address = form.elements.address.value
+    const city = form.elements.city.value
+    const email = form.elements.email.value
+
+    
     const body = {
         contact :{
             firstName : "kanap",
