@@ -194,9 +194,16 @@ function submitForm(e){
         .then ((data) => console.log(data)) 
         console.log(form.elements.firstName.value)
 }
-function validateForm(){
+function validateForm() {
     const form = document.querySelector(".cart__order__form")
-}
+    const inputs = form.querySelectorAll("input")
+    input.forEach((input) => {
+    if (input.value === ""){
+    alert ("merci de remplir tous les champs")
+    }
+    
+})
+
 function makeRequestBody(){
     const form = document.querySelector(".cart__order__form")
     const firstName = form.elements.firstName.value
