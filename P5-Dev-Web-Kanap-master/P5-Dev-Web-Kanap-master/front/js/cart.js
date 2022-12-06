@@ -209,6 +209,7 @@ function makeRequestBody(){
         }, 
     products: getIdsFromCache()
     }
+console.log(body)
     return body
 }
 
@@ -221,4 +222,5 @@ function getIdsFromCache(){
         const id = key.split("-")[0]
         ids.push(id)
     }
+    return ids
 }
