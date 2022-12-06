@@ -181,6 +181,7 @@ function submitForm(e){
     }
 
     if (isFormInvalid()) return
+    if (isEmailInvalid()) return
 
     const body = makeRequestBody()
     fetch("http://localhost:3000/api/products/order", {
@@ -193,6 +194,15 @@ function submitForm(e){
         .then((res) => res.json())
         .then ((data) => console.log(data)) 
         console.log(form.elements.firstName.value)
+}
+function isEmailInvalid(){
+    const email = document.querySelector("#email")
+    const regex = /^[a-zA-z0-9+_.-]+@(.+)$
+    if (regex.test(email) === false){
+        alert ("merci d'inscrire un email correct ")
+        return true
+    }
+    return false
 }
 function isFormInvalid() {
     const form = document.querySelector(".cart__order__form")
