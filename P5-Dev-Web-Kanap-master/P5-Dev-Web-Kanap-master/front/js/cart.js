@@ -198,10 +198,9 @@ function validateForm() {
     const form = document.querySelector(".cart__order__form")
     const inputs = form.querySelectorAll("input")
     input.forEach((input) => {
-    if (input.value === ""){
+    if (input.value === "") {
     alert ("merci de remplir tous les champs")
     }
-    
 })
 
 function makeRequestBody(){
@@ -238,4 +237,5 @@ function getIdsFromCache(){
     }
     console.log(ids)
     return ids
+}
 }
