@@ -187,7 +187,7 @@ function submitForm(e){
     })
         .then((res) => res.json())
         .then ((data) => console.log(data)) 
-        console.log(form.elements.firstName)
+        console.log(form.elements.firstName.value)
 }
 
 function makeRequestBody(){
