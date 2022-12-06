@@ -201,11 +201,11 @@ function makeRequestBody(){
     
     const body = {
         contact :{
-            firstName : "kanap",
-            lastName :  "kanap",
-            address : "dodo",
-            city : "pouet",
-            email : "pouet pouet"
+            firstName : firstName,
+            lastName :  lastName,
+            address : address,
+            city : city,
+            email : email
         }, 
     products: ["107fb5b75607497b96722bda5b504926"]
     }
