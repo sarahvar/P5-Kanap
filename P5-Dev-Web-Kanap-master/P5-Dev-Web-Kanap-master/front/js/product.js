@@ -74,13 +74,13 @@ function saveOrder(color, quantity) {
         quantity: Number (quantity),
         imageUrl: imgUrl,
         altTxt: altText,
-        name: articleName
+        name: articleName,
     }
     localStorage.setItem(key, JSON.stringify (data))
 }
 function isOrderInvalid(color,quantity){
     if (color == null || color === "" || quantity == null ||quantity <= 0 || quantity >= 101) {
-        alert("S'il vous plaît selectionnez une couleur ET une quantité")
+        alert("S'il vous plaît selectionnez une couleur ET une quantité corrects")
         return true
     }
 

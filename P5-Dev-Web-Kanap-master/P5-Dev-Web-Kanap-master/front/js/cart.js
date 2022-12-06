@@ -51,6 +51,9 @@ function makeDescription(item){
 
     const span = document.createElement("p")
     span.textContent = item.price + " €"
+    console.log(span)
+    //soucis ici //
+
 
     description.appendChild(h2)
     description.appendChild(p)
@@ -129,7 +132,7 @@ function deleteArticleFromPage(item){
         `article[data-id="${item._id}"][data-color="${item.color}]`
     )
     console.log("article supprimer", articleToDelete)
-    articleToDelete.removeItem()
+    articleToDelete.remove()
 }
 
 function displayTotalQuantity(){
@@ -143,6 +146,7 @@ function displayTotalPrice(){
     const total = cart.reduce((total, item) => total + item.price * item.quantity,0)
     totalPrice.textContent = total
 }
+//soucis ici//
 
 function displayArticle(article){
     document.querySelector("#cart__items").appendChild(article)
@@ -183,6 +187,7 @@ function submitForm(e){
     })
         .then((res) => res.json())
         .then ((data) => console.log(data)) 
+        console.log(form.elements.firstName)
 }
 
 function makeRequestBody(){
