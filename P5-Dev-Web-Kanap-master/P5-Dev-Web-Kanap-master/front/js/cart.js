@@ -207,7 +207,13 @@ function makeRequestBody(){
             city : city,
             email : email
         }, 
-    products: ["_id"]
+    products: getIdsFromCache()
     }
     return body
+}
+
+function getIdsFromCache(){
+    const numberOfProducts = localStorage.length
+    const ids = []
+    
 }
