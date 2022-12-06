@@ -175,8 +175,13 @@ function makeImageDiv(item){
 
 function submitForm(e){
     e.preventDefault()
-    if (cart.length === 0) alert ("s'il vous plaît veuillez acheter un produit")
-    
+    if (cart.length === 0){
+    alert ("s'il vous plaît veuillez acheter un produit")
+    return
+    }
+
+    validateForm()
+
     const body = makeRequestBody()
     fetch("http://localhost:3000/api/products/order", {
         method: "POST",
@@ -189,7 +194,9 @@ function submitForm(e){
         .then ((data) => console.log(data)) 
         console.log(form.elements.firstName.value)
 }
-
+function validateForm(){
+    const form = document.querySelector(".cart__order__form")
+}
 function makeRequestBody(){
     const form = document.querySelector(".cart__order__form")
     const firstName = form.elements.firstName.value
@@ -222,5 +229,6 @@ function getIdsFromCache(){
         const id = key.split("-")[0]
         ids.push(id)
     }
+    console.log(ids)
     return ids
 }
