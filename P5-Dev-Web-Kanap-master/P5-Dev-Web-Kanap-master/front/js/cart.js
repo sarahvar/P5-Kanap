@@ -1,25 +1,42 @@
-const cart = [];
+function getProductById(_id)
+{
+    return fetch(`http://localhost:3000/api/products/${_id}`)
+	    .then((response) => response.json())
+        .then((res) => handleData(res))
+        .catch((error) => {
+            console.log(error);   
+    });
+}
+function handleData(kanap){
+    const { altTxt, imageUrl, name, price} = kanap
+    imgUrl = imageUrl
+    altText = altTxt
+    articleName = name
+    productPrice = price
+}
+
+let cart = [];
 
 retrieveItemsFromCache()
 cart.forEach((item) => displayItem(item))
 
-const orderButton = document.querySelector("#order")
+let orderButton = document.querySelector("#order")
 orderButton.addEventListener("click", (e) => submitForm(e))
 
 function retrieveItemsFromCache(){
-    const numberOfItems = localStorage.length;
+    let numberOfItems = localStorage.length;
 for (let i = 0; i < numberOfItems; i++){
-    const item = localStorage.getItem(localStorage.key(i)) || ""
-    const itemObject = JSON.parse(item)
+    let item = localStorage.getItem(localStorage.key(i)) || ""
+    let itemObject = JSON.parse(item)
     cart.push(itemObject)
 }
 }
 
 function displayItem(item){
-    const article = makeArticle(item)
-    const imageDiv = makeImageDiv(item)
+    let article = makeArticle(item)
+    let imageDiv = makeImageDiv(item)
     article.appendChild(imageDiv)
-    const cardItemContent = makeCartContent(item)
+    let cardItemContent = makeCartContent(item)
     article.appendChild(cardItemContent)
     displayArticle(article)
     displayTotalQuantity()
@@ -27,11 +44,11 @@ function displayItem(item){
 }
 
 function makeCartContent(item){
-    const cardItemContent = document.createElement("div")
+    let cardItemContent = document.createElement("div")
     cardItemContent.classList.add("cart__item__content")
 
-    const description = makeDescription(item)
-    const settings = makeSettings(item) 
+    let description = makeDescription(item)
+    let settings = makeSettings(item) 
     
     cardItemContent.appendChild(description)
     cardItemContent.appendChild(settings)
@@ -40,19 +57,21 @@ function makeCartContent(item){
 }
 
 function makeDescription(item){
-    const description = document.createElement("div")
+    let description = document.createElement("div")
     description.classList.add("cart__item__content__description")
 
-    const h2 = document.createElement("h2")
+    let h2 = document.createElement("h2")
     h2.textContent = item.name
 
-    const p = document.createElement("p")
+    let p = document.createElement("p")
     p.textContent = item.color
+    console.log(item)
 
-    const span = document.createElement("p")
-    span.textContent = item.price + " €"
-    console.log(span)
-    //soucis ici //
+    product = getProductById(item._id)
+    console.log(product)
+    let span = document.createElement("p")
+    span.textContent = product.price + " €"
+    
 
 
     description.appendChild(h2)
@@ -62,7 +81,7 @@ function makeDescription(item){
 }
 
 function makeSettings(item){
-    const settings = document.createElement("div")
+    let settings = document.createElement("div")
     settings.classList.add("cart__item__content__settings")
 
     addQuantityToSettings(settings, item)
@@ -70,12 +89,12 @@ function makeSettings(item){
     return settings
 }
 function addQuantityToSettings(settings, item){
-    const quantity = document.createElement("div")
+    let quantity = document.createElement("div")
     quantity.classList.add("cart__item__content__settings__quantity")
-    const p = document.createElement("p")
+    let p = document.createElement("p")
     p.textContent="Qté : "
     quantity.appendChild(p)
-    const input =document.createElement("input")
+    let input =document.createElement("input")
     input.type = "number"
     input.classList.add = ("itemQuantity")
     input.name = "itemQuantity"
@@ -87,7 +106,7 @@ function addQuantityToSettings(settings, item){
     settings.appendChild(quantity)
 }
 function updatePriceAndQuantity(_id, newValue,item){
-  const itemToUpdate = cart.find((item) => item._id === _id)
+  let itemToUpdate = cart.find((item) => item._id === _id)
   itemToUpdate.quantity = Number (newValue)
   item.quantity = itemToUpdate.quantity
   displayTotalQuantity()
@@ -96,30 +115,30 @@ function updatePriceAndQuantity(_id, newValue,item){
 }
 
 function deleteDataFromCache(item){
-    const key = `${item._id}-${item.color}`
+    let key = `${item._id}-${item.color}`
     localStorage.removeItem(key)
 }
 
 function saveNewDataToCache(item) {
-  const dataToSave = JSON.stringify(item)
-  const key = `${item._id}-${item.color}`
+  let dataToSave = JSON.stringify(item)
+  let key = `${item._id}-${item.color}`
   localStorage.setItem(key, dataToSave)
 }
 
 function addDeleteToSettings(settings, item){
-    const div = document.createElement("div")
+    let div = document.createElement("div")
     div.classList.add("cart__item__content__settings__delete")
     div.addEventListener("click", () => deleteItem (item))
 
 
-    const p = document.createElement("p")
+    let p = document.createElement("p")
     p.textContent = "Supprimer"
     div.appendChild(p)
     settings.appendChild(div)
 }
 
 function deleteItem(item){
-  const itemToDelete = cart.findIndex((product) => product.id === item.id && product.color === item.color)
+  let itemToDelete = cart.findIndex((product) => product.id === item.id && product.color === item.color)
   cart.splice (itemToDelete, 1)
   displayTotalPrice ()
   displayTotalQuantity()
@@ -128,7 +147,7 @@ function deleteItem(item){
 }
 
 function deleteArticleFromPage(item){
-    const articleToDelete = document.querySelector(
+    let articleToDelete = document.querySelector(
         `article[data-id="${item._id}"][data-color="${item.color}]`
     )
     console.log("article supprimer", articleToDelete)
@@ -136,24 +155,24 @@ function deleteArticleFromPage(item){
 }
 
 function displayTotalQuantity(){
-  const totalQuantity = document.querySelector("#totalQuantity")
-  const total = cart.reduce((total, item) => total + item.quantity,0)
+  let totalQuantity = document.querySelector("#totalQuantity")
+  let total = cart.reduce((total, item) => total + item.quantity,0)
   totalQuantity.textContent = total
 }
 
 function displayTotalPrice(){
-    const totalPrice = document.querySelector("#totalPrice")
-    const total = cart.reduce((total, item) => total + item.price * item.quantity,0)
+    let totalPrice = document.querySelector("#totalPrice")
+    let total = cart.reduce((total, item) => total + item.price * item.quantity,0)
     totalPrice.textContent = total
 }
-//soucis ici//
+
 
 function displayArticle(article){
     document.querySelector("#cart__items").appendChild(article)
 }
 
 function makeArticle(item){
-    const article = document.createElement("article")
+    let article = document.createElement("article")
     article.classList.add("card__item")
     article.dataset.id = item._id
     article.dataset.color = item.color
@@ -161,10 +180,10 @@ function makeArticle(item){
 }
 
 function makeImageDiv(item){
-    const div = document.createElement ("div")
+    let div = document.createElement ("div")
     div.classList.add("cart__item__img")
 
-    const image = document.createElement('img')
+    let image = document.createElement('img')
     image.src = item.imageUrl
     image.alt = item.altTxt
     div.appendChild(image)
@@ -183,7 +202,7 @@ function submitForm(e){
     if (isFormInvalid()) return
     if (isEmailInvalid()) return
 
-    const body = makeRequestBody()
+    let body = makeRequestBody()
     fetch("http://localhost:3000/api/products/order", {
         method: "POST",
         body: JSON.stringify(body),
@@ -195,9 +214,9 @@ function submitForm(e){
         .then ((data) => console.log(data)) 
 }
 function isEmailInvalid(){
-    const email = document.querySelector("#email").value
+    let email = document.querySelector("#email").value
     console.log(email)
-    const regex = /^[a-zA-z0-9+_.-]+@(.+)$/
+    let regex = /^[a-zA-z0-9+_.-]+@(.+)$/
     if (regex.test(email) === false){
         alert ("merci d'inscrire un email correct ")
         return true
@@ -205,8 +224,8 @@ function isEmailInvalid(){
     return false
 }
 function isFormInvalid() {
-    const form = document.querySelector(".cart__order__form")
-    const inputs = form.querySelectorAll("input")
+    let form = document.querySelector(".cart__order__form")
+    let inputs = form.querySelectorAll("input")
     inputs.forEach((input) => {
     if (input.value === "") {
     alert("merci de remplir tous les champs")
@@ -216,15 +235,15 @@ function isFormInvalid() {
 })
 }
 function makeRequestBody(){
-    const form = document.querySelector(".cart__order__form")
-    const firstName = form.elements.firstName.value
-    const lastName = form.elements.lastName.value
-    const address = form.elements.address.value
-    const city = form.elements.city.value
-    const email = form.elements.email.value
+    let form = document.querySelector(".cart__order__form")
+    let firstName = form.elements.firstName.value
+    let lastName = form.elements.lastName.value
+    let address = form.elements.address.value
+    let city = form.elements.city.value
+    let email = form.elements.email.value
 
     
-    const body = {
+    let body = {
         contact :{
             firstName : firstName,
             lastName :  lastName,
@@ -239,12 +258,12 @@ console.log(body)
 }
 
 function getIdsFromCache(){
-    const numberOfProducts = localStorage.length
-    const ids = []
+    let numberOfProducts = localStorage.length
+    let ids = []
     for (let i = 0; i < numberOfProducts; i++){
-        const key = localStorage.key(i)
+        let key = localStorage.key(i)
         console.log(key)
-        const id = key.split("-")[0]
+        let id = key.split("-")[0]
         ids.push(id)
     }
     console.log(ids)
