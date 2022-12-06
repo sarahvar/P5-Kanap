@@ -218,5 +218,7 @@ function getIdsFromCache(){
     for (let i = 0; i < numberOfProducts; i++){
         const key = localStorage.key(i)
         console.log(key)
+        const id = key.split("-")[0]
+        ids.push(id)
     }
 }
