@@ -215,5 +215,8 @@ function makeRequestBody(){
 function getIdsFromCache(){
     const numberOfProducts = localStorage.length
     const ids = []
-    
+    for (let i = 0; i < numberOfProducts; i++){
+        const key = localStorage.key(i)
+        console.log(key)
+    }
 }
