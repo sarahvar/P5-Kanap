@@ -180,7 +180,7 @@ function submitForm(e){
     return
     }
 
-    validateForm()
+    if (isFormInvalid()) return
 
     const body = makeRequestBody()
     fetch("http://localhost:3000/api/products/order", {
@@ -194,15 +194,17 @@ function submitForm(e){
         .then ((data) => console.log(data)) 
         console.log(form.elements.firstName.value)
 }
-function validateForm() {
+function isFormInvalid() {
     const form = document.querySelector(".cart__order__form")
     const inputs = form.querySelectorAll("input")
-    input.forEach((input) => {
+    inputs.forEach((input) => {
     if (input.value === "") {
-    alert ("merci de remplir tous les champs")
+    alert("merci de remplir tous les champs")
+    return true
     }
+    return false
 })
-
+}
 function makeRequestBody(){
     const form = document.querySelector(".cart__order__form")
     const firstName = form.elements.firstName.value
@@ -237,5 +239,4 @@ function getIdsFromCache(){
     }
     console.log(ids)
     return ids
-}
 }
