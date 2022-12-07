@@ -1,3 +1,4 @@
+let cart = [];
 async function getProductById(_id)
 {
     let response_data 
@@ -11,11 +12,8 @@ async function getProductById(_id)
 }
 
 
-let cart = [];
-
 retrieveItemsFromCache()
 cart.forEach((item) => {
-    console.log(item._id)
     getProductById(item._id)
     .then((price) => displayItem(item, price))
     
@@ -26,11 +24,11 @@ orderButton.addEventListener("click", (e) => submitForm(e))
 
 function retrieveItemsFromCache(){
     let numberOfItems = localStorage.length;
-for (let i = 0; i < numberOfItems; i++){
-    let item = localStorage.getItem(localStorage.key(i)) || ""
-    let itemObject = JSON.parse(item)
-    cart.push(itemObject)
-}
+    for (let i = 0; i < numberOfItems; i++){
+        let item = localStorage.getItem(localStorage.key(i)) || ""
+        let itemObject = JSON.parse(item)
+        cart.push(itemObject)
+    }
 }
 
 function displayItem(item, price){
@@ -160,9 +158,16 @@ function displayTotalQuantity(){
   totalQuantity.textContent = total
 }
 
-function displayTotalPrice(){
-    let totalPrice = document.querySelector("#totalPrice")
-    let total = cart.reduce((total, item) => total + item.price * item.quantity,0)
+async function displayTotalPrice() {
+    let totalPrice = document.querySelector("#totalPrice");
+    let total = 0;
+    for ( j=0; j<=cart.length; j++ ) {
+        const item = cart[j];
+        console.log(item)
+        let price = await getProductById(item._id);
+        total = total + item.quantity * price;
+
+    };
     totalPrice.textContent = total
 }
 
