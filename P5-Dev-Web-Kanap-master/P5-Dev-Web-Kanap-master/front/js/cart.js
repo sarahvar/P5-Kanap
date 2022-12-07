@@ -163,12 +163,10 @@ async function displayTotalPrice() {
     let total = 0;
     for ( j=0; j<=cart.length; j++ ) {
         const item = cart[j];
-        console.log(item)
         let price = await getProductById(item._id);
         total = total + item.quantity * price;
-
-    };
-    totalPrice.textContent = total
+        totalPrice.textContent = total
+    }
 }
 
 
