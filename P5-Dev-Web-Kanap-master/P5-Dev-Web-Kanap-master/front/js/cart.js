@@ -1,24 +1,25 @@
-function getProductById(_id)
+async function getProductById(_id)
 {
-    return fetch(`http://localhost:3000/api/products/${_id}`)
-	    .then((response) => response.json())
-        .then((res) => handleData(res))
-        .catch((error) => {
-            console.log(error);   
+    let response_data 
+    await fetch(`http://localhost:3000/api/products/${_id}`)
+    .then((response) => response.json())
+    .then((res) => response_data = res)
+    .catch((error) => {
+        console.log(error);   
     });
+    return response_data.price
 }
-function handleData(kanap){
-    const { altTxt, imageUrl, name, price} = kanap
-    imgUrl = imageUrl
-    altText = altTxt
-    articleName = name
-    productPrice = price
-}
+
 
 let cart = [];
 
 retrieveItemsFromCache()
-cart.forEach((item) => displayItem(item))
+cart.forEach((item) => {
+    console.log(item._id)
+    getProductById(item._id)
+    .then((price) => displayItem(item, price))
+    
+})
 
 let orderButton = document.querySelector("#order")
 orderButton.addEventListener("click", (e) => submitForm(e))
@@ -32,22 +33,22 @@ for (let i = 0; i < numberOfItems; i++){
 }
 }
 
-function displayItem(item){
+function displayItem(item, price){
     let article = makeArticle(item)
     let imageDiv = makeImageDiv(item)
     article.appendChild(imageDiv)
-    let cardItemContent = makeCartContent(item)
+    let cardItemContent = makeCartContent(item, price)
     article.appendChild(cardItemContent)
     displayArticle(article)
     displayTotalQuantity()
     displayTotalPrice()
 }
 
-function makeCartContent(item){
+function makeCartContent(item, price){
     let cardItemContent = document.createElement("div")
     cardItemContent.classList.add("cart__item__content")
 
-    let description = makeDescription(item)
+    let description = makeDescription(item, price)
     let settings = makeSettings(item) 
     
     cardItemContent.appendChild(description)
@@ -56,7 +57,7 @@ function makeCartContent(item){
     
 }
 
-function makeDescription(item){
+function makeDescription(item, price){
     let description = document.createElement("div")
     description.classList.add("cart__item__content__description")
 
@@ -67,10 +68,9 @@ function makeDescription(item){
     p.textContent = item.color
     console.log(item)
 
-    product = getProductById(item._id)
-    console.log(product)
+
     let span = document.createElement("p")
-    span.textContent = product.price + " €"
+    span.textContent = price + " €"
     
 
 
