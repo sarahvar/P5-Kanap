@@ -64,7 +64,6 @@ function makeDescription(item, price){
 
     let p = document.createElement("p")
     p.textContent = item.color
-    console.log(item)
 
 
     let span = document.createElement("p")
@@ -136,7 +135,7 @@ function addDeleteToSettings(settings, item){
 }
 
 function deleteItem(item){
-  let itemToDelete = cart.findIndex((product) => product.id === item.id && product.color === item.color)
+  let itemToDelete = cart.find((product) => product.id === item.id && product.color === item.color)
   cart.splice (itemToDelete, 1)
   displayTotalPrice ()
   displayTotalQuantity()
@@ -146,7 +145,7 @@ function deleteItem(item){
 
 function deleteArticleFromPage(item){
     let articleToDelete = document.querySelector(
-        `article[data-id="${item._id}"][data-color="${item.color}]`
+        `article[data-id="${item._id}"][data-color="${item.color}"]`
     )
     console.log("article supprimer", articleToDelete)
     articleToDelete.remove()
@@ -165,7 +164,11 @@ async function displayTotalPrice() {
         const item = cart[j];
         let price = await getProductById(item._id);
         total = total + item.quantity * price;
+        console.log(item._id)
+        console.log(item)
+        // calcul prix total du panier
         totalPrice.textContent = total
+        // affichage du prix total du panier
     }
 }
 
