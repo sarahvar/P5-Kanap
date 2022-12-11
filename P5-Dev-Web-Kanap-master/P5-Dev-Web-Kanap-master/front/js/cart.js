@@ -217,12 +217,17 @@ function submitForm(e){
         }
     })
         .then((res) => res.json())
-        .then ((data) => console.log(data)) 
+        .then ((data) => {
+        const orderId = data.orderId
+        windows.location.href = "/confirmation.html" + "?orderId=" + orderId
+        return console.log(data)
+        })
+        .catch((err) => console.log(err))
 }
 function isEmailInvalid(){
     let email = document.querySelector("#email").value
     console.log(email)
-    let regex = /^[a-zA-z0-9+_.-]+@(.+)$/
+    let regex = (/[\w\-_.]+@[a-z]+[.][a-z]+/i);   //.-_ autorisés, doit contenir un @ et un point.
     if (regex.test(email) === false){
         alert ("merci d'inscrire un email correct ")
         return true
@@ -240,6 +245,8 @@ function isFormInvalid() {
     return false
 })
 }
+
+
 function makeRequestBody(){
     let form = document.querySelector(".cart__order__form")
     let firstName = form.elements.firstName.value
