@@ -39,7 +39,6 @@ function makeTitle(name){
 function makePrice(price){
     const span = document.querySelector("#price")
     if (span != null) span.textContent = price
-    console.log(span)
 }
 function makeCartContent(description){
     const p = document.querySelector("#description")

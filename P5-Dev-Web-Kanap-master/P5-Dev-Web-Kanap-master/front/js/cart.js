@@ -147,7 +147,6 @@ function deleteArticleFromPage(item){
     let articleToDelete = document.querySelector(
         `article[data-id="${item._id}"][data-color="${item.color}"]`
     )
-    console.log("article supprimer", articleToDelete)
     articleToDelete.remove()
 }
 
@@ -218,9 +217,8 @@ function submitForm(e){
         .then ((data) => {
         let orderId = data.orderId
         window.location.href = "/front/html/confirmation.html" + "?orderId=" + orderId
-        return console.log(data)
         })
-        .catch((err) => console.log(err))
+        .catch((err) => console.error(err))
 }
 function isEmailInvalid(){
     let email = document.querySelector("#email").value
@@ -263,7 +261,6 @@ function makeRequestBody(){
         }, 
     products: getIdsFromCache()
     }
-console.log(body)
     return body
 }
 
@@ -272,10 +269,8 @@ function getIdsFromCache(){
     let ids = []
     for (let i = 0; i < numberOfProducts; i++){
         let key = localStorage.key(i)
-        console.log(key)
         let id = key.split("-")[0]
         ids.push(id)
     }
-    console.log(ids)
     return ids
 }
