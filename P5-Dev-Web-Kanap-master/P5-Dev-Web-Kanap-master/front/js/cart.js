@@ -160,12 +160,10 @@ function displayTotalQuantity(){
 async function displayTotalPrice() {
     let totalPrice = document.querySelector("#totalPrice");
     let total = 0;
-    for ( j=0; j<=cart.length; j++ ) {
+    for ( j=0; j<cart.length; j++ ) {
         const item = cart[j];
         let price = await getProductById(item._id);
         total = total + item.quantity * price;
-        console.log(item._id)
-        console.log(item)
         // calcul prix total du panier
         totalPrice.textContent = total
         // affichage du prix total du panier
@@ -218,15 +216,14 @@ function submitForm(e){
     })
         .then((res) => res.json())
         .then ((data) => {
-        const orderId = data.orderId
-        windows.location.href = "/confirmation.html" + "?orderId=" + orderId
+        let orderId = data.orderId
+        window.location.href = "/front/html/confirmation.html" + "?orderId=" + orderId
         return console.log(data)
         })
         .catch((err) => console.log(err))
 }
 function isEmailInvalid(){
     let email = document.querySelector("#email").value
-    console.log(email)
     let regex = (/[\w\-_.]+@[a-z]+[.][a-z]+/i);   //.-_ autorisés, doit contenir un @ et un point.
     if (regex.test(email) === false){
         alert ("merci d'inscrire un email correct ")
