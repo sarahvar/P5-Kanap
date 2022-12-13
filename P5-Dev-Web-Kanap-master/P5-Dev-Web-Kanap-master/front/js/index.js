@@ -1,3 +1,4 @@
+ //L'API Fetch récupere les données des produits sur le server 3000
 fetch("http://localhost:3000/api/products")
     .then((res) => res.json())
     .then((data) => addProducts(data))
@@ -6,9 +7,7 @@ fetch("http://localhost:3000/api/products")
     });
     
 
- //L'API Fetch récupere les données des produits sur le server 3000
-
-
+ //Création des produits avec les constantes anchor, article, image, h3 et p 
 function addProducts(data){
 
     data.forEach((kanap) => {
@@ -32,20 +31,21 @@ function addProducts(data){
 })
 }
 
-
-
+//Créer une fonction qui appel l'article, l'image, le h3 et le p
 function appendElementToArticle(article,image,h3,p){
     article.appendChild(image)
     article.appendChild(h3)
     article.appendChild(p)
 }
 
+//Créer une ancre qui fait référence au fichier product.html et l'id
 function makeAnchor(_id){
     const anchor = document.createElement("a")
     anchor.href = "./product.html?_id=" + _id
     return anchor
 }
 
+//Créer une fonction qui appel l'ancre et l'article(#items)
 function appendArticleToAnchor(anchor, article){
     const items = document.querySelector("#items")
     if (items != null) {
@@ -53,6 +53,8 @@ function appendArticleToAnchor(anchor, article){
         anchor.appendChild(article)
     }
 }
+
+// Fabriquer les images et l'alt text par rapport au document index HTML 
 function makeImage(imageUrl, altTxt){
     const image =  document.createElement("img")
     image.src = imageUrl
@@ -61,6 +63,7 @@ function makeImage(imageUrl, altTxt){
     }
 
 
+//Fabriquer les H3 par rapport au fichier index HTML
 function makeH3(name){
 const h3 = document.createElement("h3")
 h3.textContent = name
@@ -68,6 +71,7 @@ h3.classList.add("productName")
 return h3
 }
 
+//Fabriquer les paragraphes par rapport au p du fichier HTML
 function makeParagraph(description){
 const p = document.createElement("p")
 p.textContent = description

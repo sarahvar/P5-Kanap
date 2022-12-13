@@ -1,3 +1,4 @@
+//Permets de récuperer le produit grâce à l'ID correspondant
 let cart = [];
 async function getProductById(_id)
 {
@@ -11,7 +12,7 @@ async function getProductById(_id)
     return response_data.price
 }
 
-
+//Looper item
 retrieveItemsFromCache()
 cart.forEach((item) => {
     getProductById(item._id)
@@ -19,9 +20,12 @@ cart.forEach((item) => {
     
 })
 
+
+//
 let orderButton = document.querySelector("#order")
 orderButton.addEventListener("click", (e) => submitForm(e))
 
+//Recuperer les items du cache
 function retrieveItemsFromCache(){
     let numberOfItems = localStorage.length;
     for (let i = 0; i < numberOfItems; i++){
@@ -31,6 +35,7 @@ function retrieveItemsFromCache(){
     }
 }
 
+//Permet d'afficher l'item 
 function displayItem(item, price){
     let article = makeArticle(item)
     let imageDiv = makeImageDiv(item)
@@ -42,6 +47,33 @@ function displayItem(item, price){
     displayTotalPrice()
 }
 
+//Fabriquer l'article
+function makeArticle(item){
+    let article = document.createElement("article")
+    article.classList.add("card__item")
+    article.dataset.id = item._id
+    article.dataset.color = item.color
+    return article
+}
+
+//Afficher l'article
+function displayArticle(article){
+    document.querySelector("#cart__items").appendChild(article)
+}
+
+// Faire l'image
+function makeImageDiv(item){
+    let div = document.createElement ("div")
+    div.classList.add("cart__item__img")
+
+    let image = document.createElement('img')
+    image.src = item.imageUrl
+    image.alt = item.altTxt
+    div.appendChild(image)
+    return div
+}
+
+//Fabriquer le contenu de la carte grâce aux élements "div" et "cart_item-content" de la page HTML cart
 function makeCartContent(item, price){
     let cardItemContent = document.createElement("div")
     cardItemContent.classList.add("cart__item__content")
@@ -55,6 +87,7 @@ function makeCartContent(item, price){
     
 }
 
+//Faire la description avec les éléments du fichier cart.html
 function makeDescription(item, price){
     let description = document.createElement("div")
     description.classList.add("cart__item__content__description")
@@ -77,6 +110,7 @@ function makeDescription(item, price){
     return description
 }
 
+//
 function makeSettings(item){
     let settings = document.createElement("div")
     settings.classList.add("cart__item__content__settings")
@@ -85,6 +119,8 @@ function makeSettings(item){
     addDeleteToSettings(settings, item)
     return settings
 }
+
+//Ajouter la quantité aux paramètres
 function addQuantityToSettings(settings, item){
     let quantity = document.createElement("div")
     quantity.classList.add("cart__item__content__settings__quantity")
@@ -102,6 +138,8 @@ function addQuantityToSettings(settings, item){
     quantity.appendChild(input)
     settings.appendChild(quantity)
 }
+
+// Charger le prix et la quantité
 function updatePriceAndQuantity(_id, newValue,item){
   let itemToUpdate = cart.find((item) => item._id === _id)
   itemToUpdate.quantity = Number (newValue)
@@ -111,17 +149,20 @@ function updatePriceAndQuantity(_id, newValue,item){
   saveNewDataToCache(item)
 }
 
+//supprimer les données du cache
 function deleteDataFromCache(item){
     let key = `${item._id}-${item.color}`
     localStorage.removeItem(key)
 }
 
+//Sauvegarder les nouvelles donées du cache
 function saveNewDataToCache(item) {
   let dataToSave = JSON.stringify(item)
   let key = `${item._id}-${item.color}`
   localStorage.setItem(key, dataToSave)
 }
 
+//Supprimer dans les paramètres avec ("cart__item__content__settings__delete") du fichier HTML
 function addDeleteToSettings(settings, item){
     let div = document.createElement("div")
     div.classList.add("cart__item__content__settings__delete")
@@ -134,6 +175,7 @@ function addDeleteToSettings(settings, item){
     settings.appendChild(div)
 }
 
+//Permets de supprimer un article
 function deleteItem(item){
   let itemToDelete = cart.find((product) => product.id === item.id && product.color === item.color)
   cart.splice (itemToDelete, 1)
@@ -143,6 +185,7 @@ function deleteItem(item){
   deleteArticleFromPage(item)
 }
 
+//Supprime l'article de la page
 function deleteArticleFromPage(item){
     let articleToDelete = document.querySelector(
         `article[data-id="${item._id}"][data-color="${item.color}"]`
@@ -150,12 +193,14 @@ function deleteArticleFromPage(item){
     articleToDelete.remove()
 }
 
+//Calcul la quantité total
 function displayTotalQuantity(){
   let totalQuantity = document.querySelector("#totalQuantity")
   let total = cart.reduce((total, item) => total + item.quantity,0)
   totalQuantity.textContent = total
 }
 
+// Calcul le prix total
 async function displayTotalPrice() {
     let totalPrice = document.querySelector("#totalPrice");
     let total = 0;
@@ -170,28 +215,6 @@ async function displayTotalPrice() {
 }
 
 
-function displayArticle(article){
-    document.querySelector("#cart__items").appendChild(article)
-}
-
-function makeArticle(item){
-    let article = document.createElement("article")
-    article.classList.add("card__item")
-    article.dataset.id = item._id
-    article.dataset.color = item.color
-    return article
-}
-
-function makeImageDiv(item){
-    let div = document.createElement ("div")
-    div.classList.add("cart__item__img")
-
-    let image = document.createElement('img')
-    image.src = item.imageUrl
-    image.alt = item.altTxt
-    div.appendChild(image)
-    return div
-}
 
                                     //FORMULAIRE//
 
@@ -233,7 +256,7 @@ function isFormInvalid() {
     let form = document.querySelector(".cart__order__form")
     let inputs = form.querySelectorAll("input")
     inputs.forEach((input) => {
-    if (input.value === "") {
+    if (input.value === "" === false) {
     alert("merci de remplir tous les champs")
     return true
     }
