@@ -134,14 +134,14 @@ function addQuantityToSettings(settings, item){
     input.min = "1"
     input.max = "100"
     input.value = item.quantity
-    input.addEventListener("input", () => updatePriceAndQuantity(item._id, input.value,item))
+    input.addEventListener("input", () => updatePriceAndQuantity(item._id, input.value,item, item.color))
     quantity.appendChild(input)
     settings.appendChild(quantity)
 }
 
 // Charger le prix et la quantité
-function updatePriceAndQuantity(_id, newValue,item){
-  let itemToUpdate = cart.find((item) => item._id === _id)
+function updatePriceAndQuantity(_id, newValue, item, color){
+  let itemToUpdate = cart.find((item) => item._id === _id && item.color === color ) 
   itemToUpdate.quantity = Number (newValue)
   item.quantity = itemToUpdate.quantity
   displayTotalQuantity()
@@ -196,7 +196,11 @@ function deleteArticleFromPage(item){
 //Calcul la quantité total
 function displayTotalQuantity(){
   let totalQuantity = document.querySelector("#totalQuantity")
-  let total = cart.reduce((total, item) => total + item.quantity,0)
+  let total = 0
+  for (let i = 0; i < cart.length; i++){
+    item = cart[i]
+    total = total + item.quantity
+    }
   totalQuantity.textContent = total
 }
 
@@ -225,27 +229,30 @@ function submitForm(e){
     return
     }
 
-    if (isFormInvalid()) return
-    if (isEmailInvalid()) return
-
-    let body = makeRequestBody()
-    fetch("http://localhost:3000/api/products/order", {
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-        .then((res) => res.json())
-        .then ((data) => {
-        let orderId = data.orderId
-        window.location.href = "/front/html/confirmation.html" + "?orderId=" + orderId
+    isEmailInvalid() 
+    console.log (isEmailInvalid())
+    console.log (isFormInvalid())
+    console.log ("bonjour")
+    if (isFormInvalid() === false ) {
+        let body = makeRequestBody()
+        fetch("http://localhost:3000/api/products/order", {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {
+                "Content-Type": "application/json"
+            }
         })
-        .catch((err) => console.error(err))
+            .then((res) => res.json())
+            .then ((data) => {
+            let orderId = data.orderId
+            window.location.href = "/front/html/confirmation.html" + "?orderId=" + orderId
+            })
+            .catch((err) => console.error(err))
+    }
 }
 function isEmailInvalid(){
     let email = document.querySelector("#email").value
-    let regex = (/[\w\-_.]+@[a-z]+[.][a-z]+/i);   //.-_ autorisés, doit contenir un @ et un point.
+    let regex = (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);   //.-_ autorisés, doit contenir un @ et un point.
     if (regex.test(email) === false){
         alert ("merci d'inscrire un email correct ")
         return true
@@ -263,7 +270,6 @@ function isFormInvalid() {
     return false
 })
 }
-
 
 function makeRequestBody(){
     let form = document.querySelector(".cart__order__form")
