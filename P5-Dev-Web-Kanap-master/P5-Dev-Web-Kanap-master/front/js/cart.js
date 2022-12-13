@@ -260,15 +260,117 @@ function isEmailInvalid(){
     return false
 }
 function isFormInvalid() {
-    let form = document.querySelector(".cart__order__form")
-    let inputs = form.querySelectorAll("input")
-    inputs.forEach((input) => {
-    if (input.value === "" === false) {
-    alert("merci de remplir tous les champs")
-    return true
+    console.log(isEmailInvalid())
+    let nameRegEx = /^[a-zA-Zàçèéüä]{2,30}$/; 
+    let addressRegEx = /^[0-9]{1,5}[\ ][a-zA-Zàçèéüä]{2,50}[\ ][a-zA-Zàçèéüä\ ]{2,50}$/;
+    let cityRegEx = /^[A-Za-zéàçèüâêîôû-]{1,50}$/;
+    let emailRegEx = /^[a-zA-z0-9.-_]+[@]{1}[a-zA-z0-9.-_]+[.]{1}[a-z]{2,10}$/;
+    
+    
+    
+    
+    
+        let firstNameField = document.getElementById('firstName');
+    
+        firstNameField.addEventListener('change', () => {
+            if(nameRegEx.test(firstNameField.value)){
+                document.getElementById('firstNameErrorMsg').innerHTML = null;
+                contact.firstName = firstNameField.value;
+            } else {
+                document.getElementById('firstNameErrorMsg').innerHTML = 'Veuiller saisier un prénom valide';
+            }
+        })
+    
+        let lastNameField = document.getElementById('lastName');
+        
+        lastNameField.addEventListener('change', () => {
+            if(nameRegEx.test(lastNameField.value)){
+                document.getElementById('lastNameErrorMsg').innerHTML = null;
+                contact.lastName = lastNameField.value;
+            } else {
+                document.getElementById('lastNameErrorMsg').innerHTML = 'Veuiller saisier un nom valide';
+            }
+        })
+    
+        let addressField = document.getElementById('address');
+        // Le format d'adresse choisi est [N°][rue/route/chemin][nom de la rue/route/chemin]
+    
+        addressField.addEventListener('change', () => {
+            if(addressRegEx.test(addressField.value)){
+                document.getElementById('addressErrorMsg').innerHTML = null;
+                contact.address = addressField.value;
+            } else {
+                document.getElementById('addressErrorMsg').innerHTML = 'L\'adresse saisie n\'est pas valide. Ex.: 123 rue de la Paix';
+            }
+    
+        })
+    
+        let cityField = document.getElementById('city');
+    
+        cityField.addEventListener('change', () => {
+            if(cityRegEx.test(cityField.value)){
+                document.getElementById('cityErrorMsg').innerHTML = null;
+                contact.city = cityField.value;
+            } else {
+                document.getElementById('cityErrorMsg').innerHTML = 'Veuillez saisir un nom de Ville valide';
+            }
+        })
+    
+        let emailField = document.getElementById('email');
+        emailField.addEventListener('change', () => {
+            if(emailRegEx.test(emailField.value)){
+                document.getElementById('emailErrorMsg').innerHTML = null;
+                contact.email = emailField.value;
+            } else {
+                document.getElementById('emailErrorMsg').innerHTML = 'Veuillez saisir une adresse mail valide';
+            }
+        })
+    
+    
+    
+    
+    
+        let fields = document.querySelectorAll('.cart__order__form__question');
+        fields.forEach(field => {
+            field.addEventListener('change', () => {
+                if(allFormFieldsComplete()){
+                    document.getElementById('order').disabled = false;
+                    console.log(typeof getFromLocalStorage().map(product => product._id));
+                } else {
+                    document.getElementById('order').disabled = true;
+                }
+    
+    
+            })
+        })
+        
+    
+    
+    
+    
+    
+    
+    /**
+     * Checks the field values of the contact form for completion and regex accuracy
+     * 
+     * @returns true if all the form fields are correctly completed, false otherwise
+     */
+    function allFormFieldsComplete(){
+        if(document.getElementById('firstName').value.match(nameRegEx)
+        && document.getElementById('lastName').value.match(nameRegEx)
+        && document.getElementById('address').value.match(addressRegEx)
+        && document.getElementById('city').value.match(cityRegEx)
+        && document.getElementById('email').value.match(emailRegEx)){
+            return true;
+        } else {
+            return false;
+        }
     }
-    return false
-})
+  if (regex.test(form) === false) {
+    alert ("merci de mieux renseigner vôtre formulaire")
+    return true
+  }
+  return false
 }
 
 function makeRequestBody(){
