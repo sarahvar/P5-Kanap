@@ -233,6 +233,7 @@ function submitForm(e){
     console.log (isEmailInvalid())
     console.log (isFormInvalid())
     console.log ("bonjour")
+    if (isFormInvalid() === false ) {
         let body = makeRequestBody()
         fetch("http://localhost:3000/api/products/order", {
             method: "POST",
@@ -248,6 +249,7 @@ function submitForm(e){
             })
             .catch((err) => console.error(err))
     }
+}
 function isEmailInvalid(){
     let email = document.querySelector("#email").value
     let regex = (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);   //.-_ autorisés, doit contenir un @ et un point.
