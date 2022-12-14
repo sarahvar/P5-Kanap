@@ -233,7 +233,6 @@ function submitForm(e){
     console.log (isEmailInvalid())
     console.log (isFormInvalid())
     console.log ("bonjour")
-    
         let body = makeRequestBody()
         fetch("http://localhost:3000/api/products/order", {
             method: "POST",
