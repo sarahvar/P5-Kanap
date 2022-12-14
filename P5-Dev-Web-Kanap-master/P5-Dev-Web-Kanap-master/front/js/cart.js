@@ -277,7 +277,7 @@ function isFormInvalid() {
                 document.getElementById('firstNameErrorMsg').innerHTML = null;
                 contact.firstName = firstNameField.value;
             } else {
-                document.getElementById('firstNameErrorMsg').innerHTML = 'Veuiller saisier un prénom valide';
+                document.getElementById('firstNameErrorMsg').innerHTML = 'Veuillez saisir un prénom valide';
             }
         })
     
@@ -288,7 +288,7 @@ function isFormInvalid() {
                 document.getElementById('lastNameErrorMsg').innerHTML = null;
                 contact.lastName = lastNameField.value;
             } else {
-                document.getElementById('lastNameErrorMsg').innerHTML = 'Veuiller saisier un nom valide';
+                document.getElementById('lastNameErrorMsg').innerHTML = 'Veuillez saisir un nom valide';
             }
         })
     
@@ -351,9 +351,10 @@ function isFormInvalid() {
     
     
     /**
-     * Checks the field values of the contact form for completion and regex accuracy
+     * Vérifie les valeurs de champ du formulaire de contact pour l'achèvement 
+    et l'exactitude des expressions régulières
      * 
-     * @returns true if all the form fields are correctly completed, false otherwise
+     * @returns vrai si tous les champs du formulaire sont correctement renseignés, faux sinon
      */
     function allFormFieldsComplete(){
         if(document.getElementById('firstName').value.match(nameRegEx)
@@ -366,11 +367,6 @@ function isFormInvalid() {
             return false;
         }
     }
-  if (regex.test(form) === false) {
-    alert ("merci de mieux renseigner vôtre formulaire")
-    return true
-  }
-  return false
 }
 
 function makeRequestBody(){
