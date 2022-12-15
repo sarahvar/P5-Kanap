@@ -146,7 +146,6 @@ function addQuantityToSettings(settings, item){
     input.addEventListener("input", () => updatePriceAndQuantity(item._id, input.value,item, item.color))
     quantity.appendChild(input)
     settings.appendChild(quantity)
-    isQuantityInvalid()
 }
 
 // Charger le prix et la quantité
@@ -161,7 +160,7 @@ function updatePriceAndQuantity(_id, newValue, item, color){
   isQuantityInvalid()
 }
 
-//supprimer les données du cache
+//Supprimer les données du cache
 function deleteDataFromCache(item){
     let key = `${item._id}-${item.color}`
     localStorage.removeItem(key)
