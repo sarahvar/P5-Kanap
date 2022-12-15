@@ -146,7 +146,6 @@ function addQuantityToSettings(settings, item){
     input.addEventListener("input", () => updatePriceAndQuantity(item._id, input.value,item, item.color))
     quantity.appendChild(input)
     settings.appendChild(quantity)
-    isQuantityInvalid
 }
 
 // Charger le prix et la quantité
@@ -245,7 +244,7 @@ function submitForm(e){
     console.log (isEmailInvalid())
     console.log (isFormInvalid())
     console.log ("bonjour")
-    if (isFormInvalid() === false ) {
+    if (isEmailInvalid() === false ) {
         let body = makeRequestBody()
         fetch("http://localhost:3000/api/products/order", {
             method: "POST",
@@ -272,7 +271,6 @@ function isEmailInvalid(){
     return false
 }
 function isFormInvalid() {
-    console.log(isEmailInvalid())
     let nameRegEx = /^[a-zA-Zàçèéüä]{2,30}$/; 
     let addressRegEx = /^[0-9]{1,5}[\ ][a-zA-Zàçèéüä]{2,50}[\ ][a-zA-Zàçèéüä\ ]{2,50}$/;
     let cityRegEx = /^[A-Za-zéàçèüâêîôû-]{1,50}$/;
@@ -357,16 +355,11 @@ function isFormInvalid() {
         })
         
     
-    
-    
-    
-    
-    
     /**
      * Vérifie les valeurs de champ du formulaire de contact pour l'achèvement 
     et l'exactitude des expressions régulières
      * 
-     * @returns vrai si tous les champs du formulaire sont correctement renseignés, faux sinon
+     * @returns vrai si tous les champs du formulaire sont correctement renseignés, sinon faux 
      */
     function allFormFieldsComplete(){
         if(document.getElementById('firstName').value.match(nameRegEx)
@@ -382,15 +375,15 @@ function isFormInvalid() {
 }
 
 function makeRequestBody(){
-    let form = document.querySelector(".cart__order__form")
-    let firstName = form.elements.firstName.value
-    let lastName = form.elements.lastName.value
-    let address = form.elements.address.value
-    let city = form.elements.city.value
-    let email = form.elements.email.value
+    const form = document.querySelector(".cart__order__form")
+    const firstName = form.elements.firstName.value
+    const lastName = form.elements.lastName.value
+    const address = form.elements.address.value
+    const city = form.elements.city.value
+    const email = form.elements.email.value
 
     
-    let body = {
+    const body = {
         contact :{
             firstName : firstName,
             lastName :  lastName,
@@ -404,8 +397,8 @@ function makeRequestBody(){
 }
 
 function getIdsFromCache(){
-    let numberOfProducts = localStorage.length
-    let ids = []
+    const numberOfProducts = localStorage.length
+    const ids = []
     for (let i = 0; i < numberOfProducts; i++){
         let key = localStorage.key(i)
         let id = key.split("-")[0]
