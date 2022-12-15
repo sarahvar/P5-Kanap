@@ -146,6 +146,7 @@ function addQuantityToSettings(settings, item){
     input.addEventListener("input", () => updatePriceAndQuantity(item._id, input.value,item, item.color))
     quantity.appendChild(input)
     settings.appendChild(quantity)
+    isQuantityInvalid
 }
 
 // Charger le prix et la quantité
@@ -157,7 +158,7 @@ function updatePriceAndQuantity(_id, newValue, item, color){
   displayTotalQuantity()
   displayTotalPrice()
   saveNewDataToCache(item)
-  isQuantityInvalid()
+  isQuantityInvalid(item.quantity)
 }
 
 //Supprimer les données du cache
