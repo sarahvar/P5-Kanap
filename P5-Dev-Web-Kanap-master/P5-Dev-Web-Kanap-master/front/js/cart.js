@@ -160,9 +160,12 @@ function updatePriceAndQuantity(_id, newValue, item, color){
   let itemToUpdate = cart.find((item) => item._id === _id && item.color === color ) 
   itemToUpdate.quantity = Number (newValue)
   item.quantity = itemToUpdate.quantity
+
   displayTotalQuantity()
   displayTotalPrice()
   saveNewDataToCache(item)
+  isOrderInvalid(quantity)
+  handleClick()
 }
 
 //supprimer les données du cache
@@ -236,7 +239,7 @@ async function displayTotalPrice() {
 
 
 
-                                    //FORMULAIRE//
+                                                            //FORMULAIRE//
 
 function submitForm(e){
     e.preventDefault()
