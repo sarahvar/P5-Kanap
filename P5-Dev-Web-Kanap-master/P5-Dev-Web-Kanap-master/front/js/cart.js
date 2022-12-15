@@ -122,38 +122,12 @@ function makeSettings(item){
 
 
 //Fonction qui permets de vérifier si la quantité n'est pas valide mettre un message d'alerte
-function isOrderInvalid(quantity){
+function isQuantityInvalid(quantity){
     if (quantity == null ||quantity <= 0 || quantity >= 101) {
         alert("S'il vous plaît selectionnez une quantité correct")
         return true
     }
 }
-
-//Permet de storer dans le localStorage 
-function saveOrder(color, quantity) {
-    const key = `${_id}-${color}`
-    const data= {
-        _id: _id,
-        color: color,
-        quantity: Number (quantity),
-        imageUrl: imgUrl,
-        altTxt: altText,
-        name: articleName,
-    }
-    localStorage.setItem(key, JSON.stringify (data))
-}
-
-//api de chrome qui permets de faire quand l'évenement "click" effectue la fonction "handleClick"
-button.addEventListener("click", handleClick)
-
-//Quand on clique permet de récupérer les données de la couleur et quantité sélectionner (.value)
-function handleClick(){
-    const quantity = document.querySelector("#quantity").value
-    if (isOrderInvalid(quantity)) return
-    saveOrder(quantity)
-    redirectToCart()
-}
-
 
 //Ajouter la quantité aux paramètres
 function addQuantityToSettings(settings, item){
@@ -172,6 +146,7 @@ function addQuantityToSettings(settings, item){
     input.addEventListener("input", () => updatePriceAndQuantity(item._id, input.value,item, item.color))
     quantity.appendChild(input)
     settings.appendChild(quantity)
+    isQuantityInvalid()
 }
 
 // Charger le prix et la quantité
@@ -183,8 +158,7 @@ function updatePriceAndQuantity(_id, newValue, item, color){
   displayTotalQuantity()
   displayTotalPrice()
   saveNewDataToCache(item)
-  isOrderInvalid()
-  handleClick()
+  isQuantityInvalid()
 }
 
 //supprimer les données du cache
