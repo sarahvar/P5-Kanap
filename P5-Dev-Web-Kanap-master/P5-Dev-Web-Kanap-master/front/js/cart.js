@@ -110,7 +110,7 @@ function makeDescription(item, price){
     return description
 }
 
-//
+//Créer les réglages avec le fichier HTML cart 
 function makeSettings(item){
     let settings = document.createElement("div")
     settings.classList.add("cart__item__content__settings")
@@ -118,6 +118,22 @@ function makeSettings(item){
     addQuantityToSettings(settings, item)
     addDeleteToSettings(settings, item)
     return settings
+}
+
+//Quand on clique permet de récupérer les données de la couleur et quantité sélectionner (.value)
+function handleClick(){
+    const quantity = document.querySelector("#quantity").value
+    if (isOrderInvalid(quantity)) return
+    saveOrder(quantity)
+    redirectToCart()
+}
+
+//Fonction qui permets de vérifier si la quantité n'est pas valide mettre un message d'alerte
+function isOrderInvalid(quantity){
+    if (quantity == null ||quantity <= 0 || quantity >= 101) {
+        alert("S'il vous plaît selectionnez une quantité corrects")
+        return true
+    }
 }
 
 //Ajouter la quantité aux paramètres
@@ -252,7 +268,7 @@ function submitForm(e){
 }
 function isEmailInvalid(){
     let email = document.querySelector("#email").value
-    let regex = (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);   //.-_ autorisés, doit contenir un @ et un point.
+    let regex = (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/); 
     if (regex.test(email) === false){
         alert ("merci d'inscrire un email correct ")
         return true
