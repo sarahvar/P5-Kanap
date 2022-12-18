@@ -149,16 +149,20 @@ function addQuantityToSettings(settings, item){
 }
 
 // Charger le prix et la quantité
-function updatePriceAndQuantity(_id, newValue, item, color){
-  let itemToUpdate = cart.find((item) => item._id === _id && item.color === color ) 
-  itemToUpdate.quantity = Number (newValue)
-  item.quantity = itemToUpdate.quantity
-
-  displayTotalQuantity()
-  displayTotalPrice()
-  saveNewDataToCache(item)
-  isQuantityInvalid(item.quantity)
-}
+function updatePriceAndQuantity(_id, newValue, item, color) {
+    let itemToUpdate = cart.find(
+    (item) => item._id === _id && item.color === color
+    );
+    itemToUpdate.quantity = Number(newValue);
+    item.quantity = itemToUpdate.quantity;
+    if (!isQuantityInvalid(item.quantity)) {
+    displayTotalQuantity();
+    displayTotalPrice();
+    saveNewDataToCache(item);
+    } else {
+    return;
+    }
+} 
 
 //Supprimer les données du cache
 function deleteDataFromCache(item){
@@ -240,11 +244,10 @@ function submitForm(e){
     return
     }
 
-    isEmailInvalid() 
-    console.log (isEmailInvalid())
-    console.log (isFormInvalid())
+    isFormValid() 
+    console.log (isFormValid())
     console.log ("bonjour")
-    if (isEmailInvalid() === false ) {
+    if (isFormValid() === false ) {
         let body = makeRequestBody()
         fetch("http://localhost:3000/api/products/order", {
             method: "POST",
@@ -261,16 +264,8 @@ function submitForm(e){
             .catch((err) => console.error(err))
     }
 }
-function isEmailInvalid(){
-    let email = document.querySelector("#email").value
-    let regex = (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/); 
-    if (regex.test(email) === false){
-        alert ("merci d'inscrire un email correct ")
-        return true
-    }
-    return false
-}
-function isFormInvalid() {
+
+function isFormValid() {
     let nameRegEx = /^[a-zA-Zàçèéüä]{2,30}$/; 
     let addressRegEx = /^[0-9]{1,5}[\ ][a-zA-Zàçèéüä]{2,50}[\ ][a-zA-Zàçèéüä\ ]{2,50}$/;
     let cityRegEx = /^[A-Za-zéàçèüâêîôû-]{1,50}$/;
