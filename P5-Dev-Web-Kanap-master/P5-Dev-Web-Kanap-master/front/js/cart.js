@@ -262,9 +262,9 @@ function submitForm(e) {
 }
 
 function isNameInvalid() {
-  let name = document.querySelector("#name").value;
+  let lastName = document.querySelector("#lastName").value;
   let regex = /^[a-zA-Zàçèéüä]{2,30}$/;
-  if (regex.test(name) === false) {
+  if (regex.test(lastName) === false) {
     alert("merci d'inscrire un nom correct ");
     return true;
   }
