@@ -260,7 +260,7 @@ function submitForm(e) {
 }
 
 function islastNameInvalid() {
-  let lastName = document.querySelector("#lastName").value;
+  let lastName = document.querySelector("#lastName").value
   let regex = /^[a-zA-Zàçèéüä]{2,30}$/;
   if (regex.test(lastName) === false) {
     alert("merci d'inscrire un nom correct ");
@@ -269,7 +269,7 @@ function islastNameInvalid() {
   return false;
 }
 function isfirstNameInvalid() {
-  let firstname = document.querySelector("#firstName").value;
+  let firstname = document.querySelector("#firstName").value
   let regex = /^[a-zA-Zàçèéüä]{2,30}$/;
   if (regex.test(firstname) === false) {
     alert("merci d'inscrire un nom de famille correct ");
@@ -279,8 +279,8 @@ function isfirstNameInvalid() {
 }
 
 function isAdressInvalid() {
-  let address = document.querySelector("#address").value;
-  let regex = /^[A-Za-zéàçèüâêîôû-]{1,50}$/;
+  let address = document.querySelector("#address").value
+  let regex = /^[0-9]{1,4}\ [a-z\ éôàêèï]+/i; //Doit commencer par un nombre (max4) puis un espace puis une chaine de caractères
   if (regex.test(address) === false) {
     alert("merci d'inscrire une adresse correct ");
     return true;
@@ -289,7 +289,7 @@ function isAdressInvalid() {
 }
 
 function isCityInvalid() {
-  let city = document.querySelector("#city").value;
+  let city = document.querySelector("#city").value
   let regex = /^[A-Za-zéàçèüâêîôû-]{1,50}$/;
   if (regex.test(city) === false) {
     alert("merci d'inscrire une ville correct ");
@@ -299,11 +299,10 @@ function isCityInvalid() {
 }
 
 function isEmailInvalid() {
-  let email = document.querySelector("#email").value;
-  let regex =
-    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  let email = document.querySelector("#email").value
+  let regex = /^[A-Za-z0-9+_.-]+@(.+)¨$/
   if (regex.test(email) === false) {
-    alert("merci d'inscrire un email correct ");
+    alert("merci d'inscrire un email correct");
     return true;
   }
   return false;
