@@ -263,7 +263,7 @@ function islastNameInvalid() {
   let lastName = document.querySelector("#lastName").value
   let regex = /^[a-zA-Zàçèéüä]{2,30}$/;
   if (regex.test(lastName) === false) {
-    alert("merci d'inscrire un nom correcte ");
+    alert("merci d'inscrire un nom de famille correcte ");
     return true;
   }
   return false;
@@ -272,7 +272,7 @@ function isfirstNameInvalid() {
   let firstname = document.querySelector("#firstName").value
   let regex = /^[a-zA-Zàçèéüä]{2,30}$/;
   if (regex.test(firstname) === false) {
-    alert("merci d'inscrire un nom de famille correcte ");
+    alert("merci d'inscrire un prénom correcte ");
     return true;
   }
   return false;
