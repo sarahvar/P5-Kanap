@@ -17,6 +17,7 @@ cart.forEach((item) => {
   getProductById(item._id).then((price) => displayItem(item, price));
 });
 
+//permets de faire lancer le order sur le bouton et faire lancer la fonction submitForm
 let orderButton = document.querySelector("#order");
 orderButton.addEventListener("click", (e) => submitForm(e));
 
@@ -150,15 +151,27 @@ function updatePriceAndQuantity(_id, newValue, item, color) {
   let itemToUpdate = cart.find(
     (item) => item._id === _id && item.color === color
   );
+  
+
+
   itemToUpdate.quantity = Number(newValue);
   item.quantity = itemToUpdate.quantity;
   if (!isQuantityInvalid(item.quantity)) {
     displayTotalQuantity();
     displayTotalPrice();
     saveNewDataToCache(item);
+    
   } else {
-    return;
-  }
+let input_Quantity = document.querySelector("input[ name = 'itemQuantity']") 
+let i = item._id + "-" + item.color
+let item_ls = localStorage.getItem(localStorage.key(i)) || "";
+let item_ls_data = JSON.parse(item_ls);
+if (item.quantity > 100 )
+{
+  input_Quantity.value = item_ls_data.quantity
+}
+  return;
+}
 }
 
 //Supprimer les données du cache
@@ -233,6 +246,7 @@ async function displayTotalPrice() {
 
 //FORMULAIRE//
 
+//Si le panier est à 0 
 function submitForm(e) {
   e.preventDefault();
   if (cart.length === 0) {
