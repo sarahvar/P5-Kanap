@@ -38,7 +38,7 @@ function appendElementToArticle(article,image,h3,p){
     article.appendChild(p)
 }
 
-//Créer une ancre qui fait référence au fichier product.html et l'id
+//Créer une ancre qui fait référence au fichier product.html et l'id de chaque produit
 function makeAnchor(_id){
     const anchor = document.createElement("a")
     anchor.href = "./product.html?_id=" + _id

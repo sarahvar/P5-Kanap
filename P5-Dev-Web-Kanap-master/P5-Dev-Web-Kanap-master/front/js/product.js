@@ -107,7 +107,7 @@ function isOrderInvalid(color,quantity){
         return true
     }
 
-//Permets de rediriger l'utilisateur vers la page cart.html
+//Permets de rediriger l'utilisateur vers la page cart.html avec la touche "ajouter au panier"
 }
 function redirectToCart(){
     window.location.href = "cart.html"
