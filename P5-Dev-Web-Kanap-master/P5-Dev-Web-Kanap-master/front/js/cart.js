@@ -212,9 +212,7 @@ function displayTotalQuantity() {
   let total = 0;
   for (let i = 0; i < cart.length; i++) {
     item = cart[i];
-    console.log(item);
     total = total + item.quantity;
-    console.log(total);
   }
   totalQuantity.textContent = total;
 }
@@ -241,7 +239,7 @@ function submitForm(e) {
     alert("s'il vous plaît veuillez acheter un produit");
     return;
   }
-  if (isEmailInvalid() === false && isNameInvalid() == false && isfirstNameInvalid() == false && isAdressInvalid == false && isCityInvalid == false) {
+  if (isEmailInvalid() === false && islastNameInvalid() == false && isfirstNameInvalid() == false && isAdressInvalid() == false && isCityInvalid() == false) {
     let body = makeRequestBody();
     fetch("http://localhost:3000/api/products/order", {
       method: "POST",
@@ -261,7 +259,7 @@ function submitForm(e) {
   }
 }
 
-function isNameInvalid() {
+function islastNameInvalid() {
   let lastName = document.querySelector("#lastName").value;
   let regex = /^[a-zA-Zàçèéüä]{2,30}$/;
   if (regex.test(lastName) === false) {
@@ -311,11 +309,6 @@ function isEmailInvalid() {
   return false;
 }
 
-
-function isFormInvalid() {
-  const form = document.querySelector(".cart__order__form")
-  const inputs = form.querySelectorAll("input")
-}
 
 function makeRequestBody() {
   const form = document.querySelector(".cart__order__form");
