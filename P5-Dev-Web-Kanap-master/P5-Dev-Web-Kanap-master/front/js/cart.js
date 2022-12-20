@@ -241,7 +241,7 @@ function submitForm(e) {
     alert("s'il vous plaît veuillez acheter un produit");
     return;
   }
-  if (isEmailInvalid() === false) {
+  if (isEmailInvalid() === false && isNameInvalid() == false && isfirstNameInvalid() == false && isAdressInvalid == false && isCityInvalid == false) {
     let body = makeRequestBody();
     fetch("http://localhost:3000/api/products/order", {
       method: "POST",
@@ -254,12 +254,52 @@ function submitForm(e) {
       .then((data) => {
         let orderId = data.orderId;
         window.location.href =
-          "/front/html/confirmation.html" + "?orderId=" + orderId;
+          "/html/confirmation.html" + "?orderId=" + orderId;
         localStorage.clear(data);
       })
       .catch((err) => console.error(err));
   }
 }
+
+function isNameInvalid() {
+  let name = document.querySelector("#name").value;
+  let regex = /^[a-zA-Zàçèéüä]{2,30}$/;
+  if (regex.test(name) === false) {
+    alert("merci d'inscrire un nom correct ");
+    return true;
+  }
+  return false;
+}
+function isfirstNameInvalid() {
+  let firstname = document.querySelector("#firstName").value;
+  let regex = /^[a-zA-Zàçèéüä]{2,30}$/;
+  if (regex.test(firstname) === false) {
+    alert("merci d'inscrire un nom de famille correct ");
+    return true;
+  }
+  return false;
+}
+
+function isAdressInvalid() {
+  let address = document.querySelector("#address").value;
+  let regex = /^[A-Za-zéàçèüâêîôû-]{1,50}$/;
+  if (regex.test(address) === false) {
+    alert("merci d'inscrire une adresse correct ");
+    return true;
+  }
+  return false;
+}
+
+function isCityInvalid() {
+  let city = document.querySelector("#city").value;
+  let regex = /^[A-Za-zéàçèüâêîôû-]{1,50}$/;
+  if (regex.test(city) === false) {
+    alert("merci d'inscrire une ville correct ");
+    return true;
+  }
+  return false;
+}
+
 function isEmailInvalid() {
   let email = document.querySelector("#email").value;
   let regex =
@@ -270,103 +310,11 @@ function isEmailInvalid() {
   }
   return false;
 }
+
+
 function isFormInvalid() {
-  let nameRegEx = /^[a-zA-Zàçèéüä]{2,30}$/;
-  let addressRegEx =
-    /^[0-9]{1,5}[\ ][a-zA-Zàçèéüä]{2,50}[\ ][a-zA-Zàçèéüä\ ]{2,50}$/;
-  let cityRegEx = /^[A-Za-zéàçèüâêîôû-]{1,50}$/;
-  let emailRegEx = /^[a-zA-z0-9.-_]+[@]{1}[a-zA-z0-9.-_]+[.]{1}[a-z]{2,10}$/;
-
-  let firstNameField = document.getElementById("firstName");
-  firstNameField.addEventListener("change", () => {
-    if (nameRegEx.test(firstNameField.value)) {
-      document.getElementById("firstNameErrorMsg").innerHTML = null;
-      contact.firstName = firstNameField.value;
-    } else {
-      document.getElementById("firstNameErrorMsg").innerHTML =
-        "Veuillez saisir un prénom valide";
-    }
-  });
-
-  let lastNameField = document.getElementById("lastName");
-
-  lastNameField.addEventListener("change", () => {
-    if (nameRegEx.test(lastNameField.value)) {
-      document.getElementById("lastNameErrorMsg").innerHTML = null;
-      contact.lastName = lastNameField.value;
-    } else {
-      document.getElementById("lastNameErrorMsg").innerHTML =
-        "Veuillez saisir un nom valide";
-    }
-  });
-
-  let addressField = document.getElementById("address");
-  // Le format d'adresse choisi est [N°][rue/route/chemin][nom de la rue/route/chemin]
-
-  addressField.addEventListener("change", () => {
-    if (addressRegEx.test(addressField.value)) {
-      document.getElementById("addressErrorMsg").innerHTML = null;
-      contact.address = addressField.value;
-    } else {
-      document.getElementById("addressErrorMsg").innerHTML =
-        "L'adresse saisie n'est pas valide. Ex.: 123 rue de la Paix";
-    }
-  });
-
-  let cityField = document.getElementById("city");
-
-  cityField.addEventListener("change", () => {
-    if (cityRegEx.test(cityField.value)) {
-      document.getElementById("cityErrorMsg").innerHTML = null;
-      contact.city = cityField.value;
-    } else {
-      document.getElementById("cityErrorMsg").innerHTML =
-        "Veuillez saisir un nom de Ville valide";
-    }
-  });
-
-  let emailField = document.getElementById("email");
-  emailField.addEventListener("change", () => {
-    if (emailRegEx.test(emailField.value)) {
-      document.getElementById("emailErrorMsg").innerHTML = null;
-      contact.email = emailField.value;
-    } else {
-      document.getElementById("emailErrorMsg").innerHTML =
-        "Veuillez saisir une adresse mail valide";
-    }
-  });
-
-  let fields = document.querySelectorAll(".cart__order__form__question");
-  fields.forEach((field) => {
-    field.addEventListener("change", () => {
-      if (allFormFieldsComplete()) {
-        document.getElementById("order").disabled = false;
-        console.log(typeof getFromLocalStorage().map((product) => product._id));
-      } else {
-        document.getElementById("order").disabled = true;
-      }
-    });
-  });
-
-  /**
-     * Vérifie les valeurs de champ du formulaire de contact pour l'achèvement 
-    et l'exactitude des expressions régulières
-     * 
-     * @returns vrai si tous les champs du formulaire sont correctement renseignés, sinon faux 
-     */
-  function allFormFieldsComplete() {
-    if (
-      document.getElementById("firstName").value.match(nameRegEx) &&
-      document.getElementById("lastName").value.match(nameRegEx) &&
-      document.getElementById("address").value.match(addressRegEx) &&
-      document.getElementById("city").value.match(cityRegEx) &&
-      document.getElementById("email").value.match(emailRegEx)
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  const form = document.querySelector(".cart__order__form")
+  const inputs = form.querySelectorAll("input")
 }
 
 function makeRequestBody() {
