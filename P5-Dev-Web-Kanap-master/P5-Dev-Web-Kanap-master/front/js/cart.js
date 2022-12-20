@@ -263,7 +263,7 @@ function islastNameInvalid() {
   let lastName = document.querySelector("#lastName").value
   let regex = /^[a-zA-Zàçèéüä]{2,30}$/;
   if (regex.test(lastName) === false) {
-    alert("merci d'inscrire un nom correct ");
+    alert("merci d'inscrire un nom correcte ");
     return true;
   }
   return false;
@@ -272,7 +272,7 @@ function isfirstNameInvalid() {
   let firstname = document.querySelector("#firstName").value
   let regex = /^[a-zA-Zàçèéüä]{2,30}$/;
   if (regex.test(firstname) === false) {
-    alert("merci d'inscrire un nom de famille correct ");
+    alert("merci d'inscrire un nom de famille correcte ");
     return true;
   }
   return false;
@@ -282,7 +282,7 @@ function isAdressInvalid() {
   let address = document.querySelector("#address").value
   let regex = /^[0-9]{1,4}\ [a-z\ éôàêèï]+/i; //Doit commencer par un nombre (max4) puis un espace puis une chaine de caractères
   if (regex.test(address) === false) {
-    alert("merci d'inscrire une adresse correct ");
+    alert("merci d'inscrire une adresse correcte ");
     return true;
   }
   return false;
@@ -292,7 +292,7 @@ function isCityInvalid() {
   let city = document.querySelector("#city").value
   let regex = /^[A-Za-zéàçèüâêîôû-]{1,50}$/;
   if (regex.test(city) === false) {
-    alert("merci d'inscrire une ville correct ");
+    alert("merci d'inscrire une ville correcte ");
     return true;
   }
   return false;
@@ -300,9 +300,9 @@ function isCityInvalid() {
 
 function isEmailInvalid() {
   let email = document.querySelector("#email").value
-  let regex = /^[A-Za-z0-9+_.-]+@(.+)¨$/
+  let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (regex.test(email) === false) {
-    alert("merci d'inscrire un email correct");
+    alert("merci d'inscrire un email correcte");
     return true;
   }
   return false;
