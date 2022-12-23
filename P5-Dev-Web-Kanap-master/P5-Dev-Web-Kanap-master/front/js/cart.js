@@ -276,7 +276,7 @@ function submitForm(e) {
 
 function islastNameInvalid() {
   let lastName = document.querySelector("#lastName").value
-  let regex = /^[a-zA-Zàçèéüä]{2,30}$/;
+  let regex = (/^[a-z]+[éàèê\-\ a-z]+[éàèêa-z]+$/i); //Peut contenir accents, peut contenir espaces et tirets, doit contenir au moins 3 caractères
   if (regex.test(lastName) === false) {
     alert("merci d'inscrire un nom de famille correcte ");
     return true;
@@ -285,7 +285,7 @@ function islastNameInvalid() {
 }
 function isfirstNameInvalid() {
   let firstname = document.querySelector("#firstName").value
-  let regex = /^[a-zA-Zàçèéüä]{2,30}$/;
+  let regex = (/^[a-z]+[éàèê\-\ a-z]+[éàèêa-z]+$/i); //Peut contenir accents, peut contenir espaces et tirets, doit contenir au moins 3 caractères
   if (regex.test(firstname) === false) {
     alert("merci d'inscrire un prénom correcte ");
     return true;
@@ -315,7 +315,7 @@ function isCityInvalid() {
 
 function isEmailInvalid() {
   let email = document.querySelector("#email").value
-  let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  let regex = (/[\w\-_.]+@[a-z]+[.][a-z]+/i); //.-_ autorisés, doit contenir un @ et un point.
   if (regex.test(email) === false) {
     alert("merci d'inscrire un email correcte");
     return true;
