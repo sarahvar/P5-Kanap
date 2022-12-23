@@ -17,7 +17,7 @@ cart.forEach((item) => {
   getProductById(item._id).then((price) => displayItem(item, price));
 });
 
-//permets de faire lancer le order sur le bouton et faire lancer la fonction submitForm
+//permets de faire lancer le order sur le bouton et faire lancer le formulaire
 let orderButton = document.querySelector("#order");
 orderButton.addEventListener("click", (e) => submitForm(e));
 
@@ -162,13 +162,14 @@ function updatePriceAndQuantity(_id, newValue, item, color) {
     saveNewDataToCache(item);
     
   } else {
-let input_Quantity = document.querySelector("input[ name = 'itemQuantity']") 
+let input_Quantity = document.querySelector("input[name = 'itemQuantity']") 
 let i = item._id + "-" + item.color
 let item_ls = localStorage.getItem(localStorage.key(i)) || "";
 let item_ls_data = JSON.parse(item_ls);
-if (item.quantity > 100 )
+if (item.quantity == null || item.quantity <= 0 || item.quantity >= 101)
 {
   input_Quantity.value = item_ls_data.quantity
+  console.log(input_Quantity)
 }
   return;
 }
@@ -246,7 +247,7 @@ async function displayTotalPrice() {
 
 //FORMULAIRE//
 
-//Si le panier est à 0 
+//Si le panier est à 0 ne pas soumettre le formulaire 
 function submitForm(e) {
   e.preventDefault();
   if (cart.length === 0) {
