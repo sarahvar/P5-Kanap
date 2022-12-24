@@ -63,7 +63,7 @@ function makeImage(imageUrl, altTxt){
     }
 
 
-//Fabriquer les H3 par rapport au fichier index HTML
+//Fabriquer les H3 par rapport au fichier index HTML du DOM
 function makeH3(name){
 const h3 = document.createElement("h3")
 h3.textContent = name

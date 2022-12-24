@@ -135,11 +135,6 @@ function addQuantityToSettings(settings, item) {
   input.max = "100";
   input.value = item.quantity;
   input.addEventListener("input", () => {
-    // if (input.value >= 100) {
-    //   return;
-    // } else {
-    //   updatePriceAndQuantity(item._id, input.value, item, item.color);
-    // }
     updatePriceAndQuantity(item._id, input.value, item, item.color);
   });
   quantity.appendChild(input);
@@ -147,7 +142,7 @@ function addQuantityToSettings(settings, item) {
 }
 
 // Charger le prix et la quantité
-function updatePriceAndQuantity(_id, newValue, item, color) {
+function updatePriceAndQuantity(_id, newValue, item, color,) {
   let itemToUpdate = cart.find(
     (item) => item._id === _id && item.color === color
   );
@@ -181,7 +176,7 @@ function deleteDataFromCache(item) {
   localStorage.removeItem(key);
 }
 
-//Sauvegarder les nouvelles donées du cache
+//Sauvegarder les nouvelles données du cache
 function saveNewDataToCache(item) {
   let dataToSave = JSON.stringify(item);
   let key = `${item._id}-${item.color}`;
@@ -203,10 +198,11 @@ function addDeleteToSettings(settings, item) {
 //Permets de supprimer un article
 function deleteItem(item) {
   let itemToDelete = cart.find(
-    (product) => product.id === item.id && product.color === item.color
+    (product) => item.id === item.id && product.color === item.color
   );
   cart.splice(itemToDelete, 1);
   displayTotalPrice();
+  console.log(displayTotalPrice)
   displayTotalQuantity();
   deleteDataFromCache(item);
   deleteArticleFromPage(item);
@@ -240,10 +236,11 @@ async function displayTotalPrice() {
     let price = await getProductById(item._id);
     total = total + item.quantity * price;
     // calcul prix total du panier
-    totalPrice.textContent = total;
+  };
+  totalPrice.textContent = total;
     // affichage du prix total du panier
-  }
 }
+
 
 //FORMULAIRE//
 
