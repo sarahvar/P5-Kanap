@@ -201,11 +201,10 @@ function deleteItem(item) {
     (product) => item.id === item.id && product.color === item.color
   );
   cart.splice(itemToDelete, 1);
-  displayTotalPrice();
-  console.log(displayTotalPrice)
-  displayTotalQuantity();
   deleteDataFromCache(item);
   deleteArticleFromPage(item);
+  displayTotalPrice();
+  displayTotalQuantity();
 }
 
 //Supprime l'article de la page
@@ -264,7 +263,7 @@ function submitForm(e) {
       .then((data) => {
         let orderId = data.orderId;
         window.location.href =
-          "/html/confirmation.html" + "?orderId=" + orderId;
+          "../html/confirmation.html" + "?orderId=" + orderId;
         localStorage.clear(data);
       })
       .catch((err) => console.error(err));
