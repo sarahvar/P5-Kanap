@@ -191,11 +191,17 @@ function addDeleteToSettings(settings, item) {
   settings.appendChild(div);
 }
 
-//Permets de supprimer un article
 function deleteItem(item) {
-  cart.splice(item, 1);
+  let itemToDelete = cart.find(
+    (product) => product.id === item.id && product.color === item.color
+  );
+  cart.splice(itemToDelete, 1);
+
+  // code métier
   deleteDataFromCache(item);
   deleteArticleFromPage(item);
+
+  // Affichage donc après le code métier
   displayTotalPrice();
   displayTotalQuantity();
 }
