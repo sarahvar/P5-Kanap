@@ -11,7 +11,7 @@ async function getProductById(_id) {
   return response_data.price;
 }
 
-//Looper item
+//appelle la fonction getProductById et itère sur les éléments item et price
 retrieveItemsFromCache();
 cart.forEach((item) => {
   getProductById(item._id).then((price) => displayItem(item, price));
@@ -160,7 +160,6 @@ function updatePriceAndQuantity(_id, newValue, item, color) {
     let item_ls_data = JSON.parse(item_ls);
     if (item.quantity == null || item.quantity <= 0 || item.quantity >= 101) {
       input_Quantity.value = item_ls_data.quantity;
-      console.log(input_Quantity);
     }
     return;
   }
@@ -179,7 +178,7 @@ function saveNewDataToCache(item) {
   localStorage.setItem(key, dataToSave);
 }
 
-//Supprimer dans les paramètres avec ("cart__item__content__settings__delete") du fichier HTML
+//Supprimer dans les paramètres avec ("cart__item__content__settings__delete") du fichier HTML du DOM
 function addDeleteToSettings(settings, item) {
   let div = document.createElement("div");
   div.classList.add("cart__item__content__settings__delete");
@@ -249,11 +248,11 @@ function submitForm(e) {
     return;
   }
   if (
-    isEmailInvalid() === false &&
     islastNameInvalid() == false &&
     isfirstNameInvalid() == false &&
     isAdressInvalid() == false &&
-    isCityInvalid() == false
+    isCityInvalid() == false &&
+    isEmailInvalid() === false
   ) {
     let body = makeRequestBody();
     fetch("http://localhost:3000/api/products/order", {
