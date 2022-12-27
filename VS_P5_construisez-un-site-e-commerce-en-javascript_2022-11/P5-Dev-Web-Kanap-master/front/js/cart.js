@@ -11,7 +11,7 @@ async function getProductById(_id) {
   return response_data.price;
 }
 
-//appelle la fonction getProductById et itère sur les éléments item et price
+//Looper item
 retrieveItemsFromCache();
 cart.forEach((item) => {
   getProductById(item._id).then((price) => displayItem(item, price));
@@ -47,6 +47,7 @@ function displayItem(item, price) {
 function makeArticle(item) {
   let article = document.createElement("article");
   article.classList.add("card__item");
+  article.id = "card__items";
   article.dataset.id = item._id;
   article.dataset.color = item.color;
   return article;
@@ -55,6 +56,10 @@ function makeArticle(item) {
 //Afficher l'article
 function displayArticle(article) {
   document.querySelector("#cart__items").appendChild(article);
+  const sectionStyle = document.getElementById("cart__items");
+  const articleStyle = document.getElementById("card__items");
+  sectionStyle.style.width = "50%";
+  sectionStyle.style.margin = "0 auto";
 }
 
 // Faire l'image
@@ -160,6 +165,7 @@ function updatePriceAndQuantity(_id, newValue, item, color) {
     let item_ls_data = JSON.parse(item_ls);
     if (item.quantity == null || item.quantity <= 0 || item.quantity >= 101) {
       input_Quantity.value = item_ls_data.quantity;
+      console.log(input_Quantity);
     }
     return;
   }
@@ -178,7 +184,7 @@ function saveNewDataToCache(item) {
   localStorage.setItem(key, dataToSave);
 }
 
-//Supprimer dans les paramètres avec ("cart__item__content__settings__delete") du fichier HTML du DOM
+//Supprimer dans les paramètres avec ("cart__item__content__settings__delete") du fichier HTML
 function addDeleteToSettings(settings, item) {
   let div = document.createElement("div");
   div.classList.add("cart__item__content__settings__delete");
@@ -190,17 +196,11 @@ function addDeleteToSettings(settings, item) {
   settings.appendChild(div);
 }
 
+//Permets de supprimer un article
 function deleteItem(item) {
-  let itemToDelete = cart.find(
-    (product) => product.id === item.id && product.color === item.color
-  );
-  cart.splice(itemToDelete, 1);
-
-  // code métier
+  cart.splice(item, 1);
   deleteDataFromCache(item);
   deleteArticleFromPage(item);
-
-  // Affichage donc après le code métier
   displayTotalPrice();
   displayTotalQuantity();
 }
@@ -248,11 +248,11 @@ function submitForm(e) {
     return;
   }
   if (
+    isEmailInvalid() === false &&
     islastNameInvalid() == false &&
     isfirstNameInvalid() == false &&
     isAdressInvalid() == false &&
-    isCityInvalid() == false &&
-    isEmailInvalid() === false
+    isCityInvalid() == false
   ) {
     let body = makeRequestBody();
     fetch("http://localhost:3000/api/products/order", {
