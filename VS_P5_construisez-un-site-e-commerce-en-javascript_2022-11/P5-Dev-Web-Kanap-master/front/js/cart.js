@@ -58,7 +58,7 @@ function displayArticle(article) {
   document.querySelector("#cart__items").appendChild(article);
   const sectionStyle = document.getElementById("cart__items");
   const articleStyle = document.getElementById("card__items");
-  sectionStyle.style.width = "50%";
+  sectionStyle.style.width = "40%";
   sectionStyle.style.margin = "0 auto";
 }
 
@@ -147,7 +147,7 @@ function addQuantityToSettings(settings, item) {
 }
 
 // Charger le prix et la quantité
-function updatePriceAndQuantity(_id, newValue, item, color) {
+function updatePriceAndQuantity(_id, newValue, item, color, price) {
   let itemToUpdate = cart.find(
     (item) => item._id === _id && item.color === color
   );
@@ -273,20 +273,27 @@ function submitForm(e) {
   }
 }
 
-function islastNameInvalid() {
-  let lastName = document.querySelector("#lastName").value;
+function isfirstNameInvalid() {
+  let firstname = document.querySelector("#firstName").value;
+  const firstnameError = document.getElementById("firstNameErrorMsg")
   let regex = /^[a-z]+[éàèê\-\ a-z]+[éàèêa-z]+$/i; //Peut contenir accents, peut contenir espaces et tirets, doit contenir au moins 3 caractères
-  if (regex.test(lastName) === false) {
-    alert("merci d'inscrire un nom de famille correcte ");
+  if (regex.test(firstname) === false) {
+    firstnameError.innerText = "Merci d'inscrire un prénom correcte ";
+    firstnameError.style.color = "red";
+    firstnameError.style.paddingTop = "32px";
     return true;
   }
   return false;
 }
-function isfirstNameInvalid() {
-  let firstname = document.querySelector("#firstName").value;
+
+function islastNameInvalid() {
+  let lastname = document.querySelector("#lastName").value;
+  const lastnameError = document.getElementById("lastNameErrorMsg")
   let regex = /^[a-z]+[éàèê\-\ a-z]+[éàèêa-z]+$/i; //Peut contenir accents, peut contenir espaces et tirets, doit contenir au moins 3 caractères
-  if (regex.test(firstname) === false) {
-    alert("merci d'inscrire un prénom correcte ");
+  if (regex.test(lastname) === false) {
+    lastnameError.innerText = "Merci d'inscrire un nom de famille correcte ";
+    lastnameError.style.color = "red";
+    lastnameError.style.paddingTop = "32px";
     return true;
   }
   return false;
@@ -294,9 +301,12 @@ function isfirstNameInvalid() {
 
 function isAdressInvalid() {
   let address = document.querySelector("#address").value;
+  const adressError = document.getElementById("addressErrorMsg")
   let regex = /^[0-9]{1,4}\ [a-z\ éôàêèï]+/i; //Doit commencer par un nombre (max4) puis un espace puis une chaine de caractères
   if (regex.test(address) === false) {
-    alert("merci d'inscrire une adresse correcte ");
+  adressError.innerText = "Merci d'inscrire une adresse correcte ";
+  adressError.style.color = "red";
+  adressError.style.paddingTop = "32px";
     return true;
   }
   return false;
@@ -304,9 +314,12 @@ function isAdressInvalid() {
 
 function isCityInvalid() {
   let city = document.querySelector("#city").value;
+  const cityError = document.getElementById("cityErrorMsg")
   let regex = /^[A-Za-zéàçèüâêîôû-]{1,50}$/;
   if (regex.test(city) === false) {
-    alert("merci d'inscrire une ville correcte ");
+    cityError.innerText = "Merci d'inscrire une ville correcte ";
+    cityError.style.color = "red";
+    cityError.style.paddingTop = "32px";
     return true;
   }
   return false;
@@ -314,9 +327,12 @@ function isCityInvalid() {
 
 function isEmailInvalid() {
   let email = document.querySelector("#email").value;
+  const emailError = document.getElementById("emailErrorMsg");
   let regex = /[\w\-_.]+@[a-z]+[.][a-z]+/i; //.-_ autorisés, doit contenir un @ et un point.
   if (regex.test(email) === false) {
-    alert("merci d'inscrire un email correcte");
+    emailError.innerText = "Merci d'inscrire une email valide";
+    emailError.style.color = "red";
+    emailError.style.paddingTop = "32px";
     return true;
   }
   return false;
