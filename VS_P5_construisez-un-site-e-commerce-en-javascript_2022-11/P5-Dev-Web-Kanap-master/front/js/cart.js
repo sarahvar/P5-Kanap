@@ -282,7 +282,7 @@ function isfirstNameInvalid() {
     firstnameError.style.paddingTop = "32px";
     setTimeout(function () {
       firstnameError.remove();
-    }, 3000);
+    }, 5000);
     return true;
   }
   return false;
@@ -298,7 +298,7 @@ function islastNameInvalid() {
     lastnameError.style.paddingTop = "32px";
     setTimeout(function () {
       lastnameError.remove();
-    }, 3000);
+    }, 5000);
     return true;
   }
   return false;
@@ -314,7 +314,7 @@ function isAdressInvalid() {
     adressError.style.paddingTop = "32px";
     setTimeout(function () {
       adressError.remove();
-    }, 3000);
+    }, 5000);
     return true;
   }
   return false;
@@ -330,7 +330,7 @@ function isCityInvalid() {
     cityError.style.paddingTop = "32px";
     setTimeout(function () {
       cityError.remove();
-    }, 3000);
+    }, 5000);
     return true;
   }
   return false;
@@ -346,7 +346,7 @@ function isEmailInvalid() {
     emailError.style.paddingTop = "32px";
     setTimeout(function () {
       emailError.remove();
-    }, 3000);
+    }, 5000);
     return true;
   }
   return false;
