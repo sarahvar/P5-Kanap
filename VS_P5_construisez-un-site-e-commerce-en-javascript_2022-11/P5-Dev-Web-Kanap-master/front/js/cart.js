@@ -1,14 +1,13 @@
 //Permets de récuperer le produit grâce à l'ID correspondant
 let cart = [];
 async function getProductById(_id) {
-  let response_data;
-  await fetch(`http://localhost:3000/api/products/${_id}`)
-    .then((response) => response.json())
-    .then((res) => (response_data = res))
-    .catch((error) => {
-      console.log(error);
-    });
-  return response_data.price;
+  try {
+    const response = await fetch(`http://localhost:3000/api/products/${_id}`);
+    const data = await response.json();
+    return data.price;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 //Looper item
@@ -275,7 +274,7 @@ function submitForm(e) {
 
 function isfirstNameInvalid() {
   let firstname = document.querySelector("#firstName").value;
-  const firstnameError = document.getElementById("firstNameErrorMsg")
+  const firstnameError = document.getElementById("firstNameErrorMsg");
   let regex = /^[a-z]+[éàèê\-\ a-z]+[éàèêa-z]+$/i; //Peut contenir accents, peut contenir espaces et tirets, doit contenir au moins 3 caractères
   if (regex.test(firstname) === false) {
     firstnameError.innerText = "Merci d'inscrire un prénom correcte ";
@@ -288,7 +287,7 @@ function isfirstNameInvalid() {
 
 function islastNameInvalid() {
   let lastname = document.querySelector("#lastName").value;
-  const lastnameError = document.getElementById("lastNameErrorMsg")
+  const lastnameError = document.getElementById("lastNameErrorMsg");
   let regex = /^[a-z]+[éàèê\-\ a-z]+[éàèêa-z]+$/i; //Peut contenir accents, peut contenir espaces et tirets, doit contenir au moins 3 caractères
   if (regex.test(lastname) === false) {
     lastnameError.innerText = "Merci d'inscrire un nom de famille correcte ";
@@ -301,12 +300,12 @@ function islastNameInvalid() {
 
 function isAdressInvalid() {
   let address = document.querySelector("#address").value;
-  const adressError = document.getElementById("addressErrorMsg")
+  const adressError = document.getElementById("addressErrorMsg");
   let regex = /^[0-9]{1,4}\ [a-z\ éôàêèï]+/i; //Doit commencer par un nombre (max4) puis un espace puis une chaine de caractères
   if (regex.test(address) === false) {
-  adressError.innerText = "Merci d'inscrire une adresse correcte ";
-  adressError.style.color = "red";
-  adressError.style.paddingTop = "32px";
+    adressError.innerText = "Merci d'inscrire une adresse correcte ";
+    adressError.style.color = "red";
+    adressError.style.paddingTop = "32px";
     return true;
   }
   return false;
@@ -314,7 +313,7 @@ function isAdressInvalid() {
 
 function isCityInvalid() {
   let city = document.querySelector("#city").value;
-  const cityError = document.getElementById("cityErrorMsg")
+  const cityError = document.getElementById("cityErrorMsg");
   let regex = /^[A-Za-zéàçèüâêîôû-]{1,50}$/;
   if (regex.test(city) === false) {
     cityError.innerText = "Merci d'inscrire une ville correcte ";
