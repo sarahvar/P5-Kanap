@@ -280,6 +280,9 @@ function isfirstNameInvalid() {
     firstnameError.innerText = "Merci d'inscrire un prénom correcte ";
     firstnameError.style.color = "red";
     firstnameError.style.paddingTop = "32px";
+    setTimeout(function(){
+      firstnameError.remove();
+}, 3000);
     return true;
   }
   return false;
@@ -293,6 +296,9 @@ function islastNameInvalid() {
     lastnameError.innerText = "Merci d'inscrire un nom de famille correcte ";
     lastnameError.style.color = "red";
     lastnameError.style.paddingTop = "32px";
+    setTimeout(function(){
+      lastnameError.remove();
+}, 3000);
     return true;
   }
   return false;
@@ -306,6 +312,9 @@ function isAdressInvalid() {
     adressError.innerText = "Merci d'inscrire une adresse correcte ";
     adressError.style.color = "red";
     adressError.style.paddingTop = "32px";
+    setTimeout(function(){
+      adressError.remove();
+}, 3000);
     return true;
   }
   return false;
@@ -319,6 +328,9 @@ function isCityInvalid() {
     cityError.innerText = "Merci d'inscrire une ville correcte ";
     cityError.style.color = "red";
     cityError.style.paddingTop = "32px";
+    setTimeout(function(){
+      cityError.remove();
+}, 3000);
     return true;
   }
   return false;
@@ -332,6 +344,9 @@ function isEmailInvalid() {
     emailError.innerText = "Merci d'inscrire une email valide";
     emailError.style.color = "red";
     emailError.style.paddingTop = "32px";
+    setTimeout(function(){
+      emailError.remove();
+}, 3000);
     return true;
   }
   return false;
